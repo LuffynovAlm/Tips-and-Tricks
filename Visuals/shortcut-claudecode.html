@@ -1,53 +1,80 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ClaudeCode Shortcuts</title><style>
-:root{--bg:linear-gradient(180deg,#ffd98a 0%,#ffa36c 16%,#ee6b6b 30%,#9d6fc4 46%,#4f8fd6 64%,#1d5c9e 84%,#123f73 100%);--sun:radial-gradient(circle at 82% 7%,rgba(255,246,214,.95) 0,rgba(255,226,150,.55) 7%,transparent 22%);--panel:rgba(255,255,255,.86);--ink:#16181d;--muted:#5d6472;--line:#e4e6ea;--chip:#f1f2f5;--kbd:#fff;--kbd-edge:#c9cdd4;--shadow:0 2px 6px rgba(16,24,40,.10),0 10px 30px rgba(16,24,40,.14);--title:linear-gradient(90deg,#c1121f,#f77f00 55%,#e0a100)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:linear-gradient(180deg,#0a0f24 0%,#16224d 30%,#2b2462 55%,#4a1f55 78%,#1a0f2b 100%);--sun:radial-gradient(circle at 82% 7%,rgba(255,236,170,.75) 0,rgba(255,214,110,.25) 5%,transparent 18%);--panel:rgba(22,25,32,.84);--ink:#e8eaee;--muted:#9aa2b1;--line:#2c313c;--chip:#1f232c;--kbd:#232833;--kbd-edge:#3a404d;--shadow:0 2px 6px rgba(0,0,0,.45),0 10px 30px rgba(0,0,0,.35);--title:linear-gradient(90deg,#ff5d5d,#ffb347 55%,#ffd86b)}}
-:root[data-theme="dark"]{--bg:linear-gradient(180deg,#0a0f24 0%,#16224d 30%,#2b2462 55%,#4a1f55 78%,#1a0f2b 100%);--sun:radial-gradient(circle at 82% 7%,rgba(255,236,170,.75) 0,rgba(255,214,110,.25) 5%,transparent 18%);--panel:rgba(22,25,32,.84);--ink:#e8eaee;--muted:#9aa2b1;--line:#2c313c;--chip:#1f232c;--kbd:#232833;--kbd-edge:#3a404d;--shadow:0 2px 6px rgba(0,0,0,.45),0 10px 30px rgba(0,0,0,.35);--title:linear-gradient(90deg,#ff5d5d,#ffb347 55%,#ffd86b)}
+<title>ClaudeCode Shortcuts</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet"><style>
+:root{--bg:linear-gradient(180deg,#ffd98a 0%,#ffa36c 16%,#ee6b6b 30%,#9d6fc4 46%,#4f8fd6 64%,#1d5c9e 84%,#123f73 100%);--sun:radial-gradient(circle at 82% 7%,rgba(255,246,214,.95) 0,rgba(255,226,150,.55) 7%,transparent 22%);--panel:rgba(255,255,255,.88);--card:#fff;--ink:#16181d;--muted:#5d6472;--line:#e6e8ec;--chip:#f1f2f5;--kbd:linear-gradient(#fff,#f2f3f6);--kbd-edge:#c9cdd4;--shadow:0 1px 2px rgba(16,24,40,.08),0 12px 32px -8px rgba(16,24,40,.22);--title:linear-gradient(90deg,#c1121f,#f77f00 55%,#e0a100)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:linear-gradient(180deg,#0a0f24 0%,#16224d 30%,#2b2462 55%,#4a1f55 78%,#1a0f2b 100%);--sun:radial-gradient(circle at 82% 7%,rgba(255,236,170,.75) 0,rgba(255,214,110,.25) 5%,transparent 18%);--panel:rgba(20,23,30,.86);--card:#1a1e26;--ink:#e8eaee;--muted:#9aa2b1;--line:#2c313c;--chip:#232833;--kbd:linear-gradient(#2a303c,#222732);--kbd-edge:#3e4553;--shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px -8px rgba(0,0,0,.6);--title:linear-gradient(90deg,#ff5d5d,#ffb347 55%,#ffd86b)}}
+:root[data-theme="dark"]{--bg:linear-gradient(180deg,#0a0f24 0%,#16224d 30%,#2b2462 55%,#4a1f55 78%,#1a0f2b 100%);--sun:radial-gradient(circle at 82% 7%,rgba(255,236,170,.75) 0,rgba(255,214,110,.25) 5%,transparent 18%);--panel:rgba(20,23,30,.86);--card:#1a1e26;--ink:#e8eaee;--muted:#9aa2b1;--line:#2c313c;--chip:#232833;--kbd:linear-gradient(#2a303c,#222732);--kbd-edge:#3e4553;--shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px -8px rgba(0,0,0,.6);--title:linear-gradient(90deg,#ff5d5d,#ffb347 55%,#ffd86b)}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%;background:#123f73}
-body{margin:0;min-height:100vh;background:var(--sun),var(--bg);background-attachment:fixed;color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body{margin:0;min-height:100vh;background:var(--sun),var(--bg);background-attachment:fixed;color:var(--ink);font:15px/1.55 "Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
 body::after{content:"";position:fixed;left:0;right:0;bottom:0;height:90px;pointer-events:none;z-index:-1;opacity:.35;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 90' preserveAspectRatio='none'%3E%3Cpath d='M0 40 Q150 0 300 40 T600 40 T900 40 T1200 40 V90 H0Z' fill='%23ffffff'/%3E%3C/svg%3E") repeat-x bottom/1200px 90px;animation:sail 18s linear infinite}
 @keyframes sail{to{background-position-x:1200px}}
 @media (prefers-reduced-motion:reduce){body::after{animation:none}}
 a{color:inherit}
-.wrap{max-width:1100px;margin:0 auto;padding:32px 16px 64px}
-header.top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:20px;padding:18px 20px;background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
-.brand{display:flex;gap:14px;align-items:center;min-width:0}
-.hat{width:58px;height:36px;flex:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25));transform:rotate(-8deg)}
-h1{font-size:28px;margin:0;letter-spacing:-.02em;background:var(--title);-webkit-background-clip:text;background-clip:text;color:transparent}
-.sub{color:var(--muted);margin:4px 0 0}
-.quote{margin:4px 0 0;font-size:13px;font-style:italic;color:var(--muted)}
-.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-input[type=search]{width:280px;max-width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit}
-button.theme,button.print{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:9px 12px;cursor:pointer;font:inherit;white-space:nowrap}
-button.print:hover,button.theme:hover{border-color:#f77f00}
-nav.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
-nav.tabs a{text-decoration:none;padding:7px 12px;border-radius:999px;background:var(--panel);border:1px solid var(--line);font-size:14px;display:inline-flex;gap:8px;align-items:center}
+.wrap{max-width:1180px;margin:0 auto;padding:32px 16px 64px}
+.glass{background:var(--panel);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+/* Header */
+header.top{padding:22px 24px 16px;margin-bottom:14px}
+.brand{display:flex;gap:16px;align-items:center;min-width:0}
+.hat{width:74px;height:46px;flex:none;filter:drop-shadow(0 3px 3px rgba(0,0,0,.22));transform:rotate(-8deg)}
+h1{font-size:34px;line-height:1.1;font-weight:800;margin:0;letter-spacing:-.03em;background:var(--title);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);margin:6px 0 0;font-size:14.5px}
+.sub a{text-decoration:none;font-weight:600}.sub a:hover{color:var(--ink)}
+.quote{margin:3px 0 0;font-size:13px;font-style:italic;color:var(--muted)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.tools .spacer{flex:1}
+input[type=search]{flex:1 1 240px;max-width:360px;height:38px;padding:0 14px 0 36px;border-radius:10px;border:1px solid var(--line);background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238a909c' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") no-repeat 12px 50%/16px;color:var(--ink);font:inherit;font-size:14px}
+input[type=search]:focus{outline:none;border-color:#f77f00;box-shadow:0 0 0 3px rgba(247,127,0,.18)}
+.tools button,label.hl{height:38px;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:0 12px;cursor:pointer;font:inherit;font-size:14px;white-space:nowrap;transition:border-color .15s}
+.tools button:hover,label.hl:hover{border-color:#f77f00}
+label.hl input{accent-color:var(--neon);margin:0}
+.neons{display:inline-flex;gap:5px;align-items:center;padding:0 4px}
+.tools .neons button{width:20px;height:20px;border-radius:50%;border:2px solid var(--card);box-shadow:0 0 0 1px var(--line);padding:0}
+.tools .neons button[aria-pressed="true"]{box-shadow:0 0 0 2px var(--ink),0 0 10px currentColor}
+/* Navigation, grouped by kind */
+nav.tabs{display:grid;gap:8px;padding:12px 16px;margin:0 0 24px;border-radius:16px}
+.grp{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.glabel{width:84px;flex:none;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+nav.tabs a{text-decoration:none;padding:5px 11px;border-radius:999px;background:var(--chip);border:1px solid transparent;font-size:13.5px;font-weight:500;display:inline-flex;gap:7px;align-items:center;transition:border-color .15s,background .15s}
+nav.tabs a:hover{border-color:var(--accent)}
+nav.tabs a[aria-current]{background:var(--accent);color:#fff}
+nav.tabs a[aria-current] .n{color:rgba(255,255,255,.85)}nav.tabs a[aria-current] .dot{background:#fff}
 nav.tabs a .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
-nav.tabs a .n{color:var(--muted);font-variant-numeric:tabular-nums}
-nav.tabs a{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-section.tool{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);margin:0 0 28px;overflow:hidden;border-top:4px solid var(--accent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
-section.tool::before{content:"☠";position:absolute;right:18px;bottom:6px;font-size:96px;line-height:1;color:var(--accent);opacity:.06;pointer-events:none}
-section.tool>header{padding:18px 20px 6px;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between}
-section.tool h2{margin:0;font-size:20px}
-.kind{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);font-weight:600}
-.src{font-size:12px;color:var(--muted)}
-.intro{padding:0 20px;color:var(--muted);font-size:14px}
-.cat{padding:8px 20px 4px}
-.cat h3{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:14px 0 6px}
-.grid{display:grid;grid-template-columns:minmax(0,1fr);gap:0}
-.row{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:16px;padding:10px 0;border-top:1px solid var(--line);align-items:center}
-.row:first-child{border-top:0}
-.row .k{min-width:0;overflow-wrap:anywhere}
-.row .d{color:var(--ink);min-width:0;overflow-wrap:anywhere}
-.row .d code{font-size:12.5px}
-code{font-family:ui-monospace,"Cascadia Code",Consolas,monospace;background:var(--chip);padding:2px 6px;border-radius:6px;font-size:13px}
-.k>code:first-child{color:var(--accent);font-weight:600}
-kbd{display:inline-block;min-width:26px;text-align:center;font:600 12.5px/1 ui-monospace,"Cascadia Code",Consolas,monospace;padding:6px 8px;border-radius:7px;background:var(--kbd);border:1px solid var(--kbd-edge);border-bottom-width:3px;color:var(--ink)}
-.plus,.then,.or{color:var(--muted);font-size:12px;margin:0 4px}
+nav.tabs a .n{color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
+/* Cheat sheet */
+section.tool{position:relative;margin:0 0 28px;overflow:hidden}
+section.tool::before{content:"☠";position:absolute;right:22px;bottom:4px;font-size:110px;line-height:1;color:var(--accent);opacity:.05;pointer-events:none}
+section.tool>header{padding:18px 24px;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 18%,transparent),transparent 75%);box-shadow:inset 0 4px 0 var(--accent)}
+section.tool>header .hat{display:none}
+section.tool h2{margin:2px 0 0;font-size:23px;font-weight:800;letter-spacing:-.02em}
+.kind{font-size:11.5px;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);font-weight:700}
+.meta{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.count{font-size:12.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent)}
+.src{font-size:11.5px;color:var(--muted)}
+.intro{margin:16px 24px 0;padding:10px 14px;border-left:3px solid var(--accent);background:color-mix(in srgb,var(--accent) 6%,transparent);border-radius:0 8px 8px 0;color:var(--muted);font-size:14px;max-width:90ch}
+.cats{padding:18px 20px 6px;columns:2 440px;column-gap:16px}
+.cat{break-inside:avoid;margin:0 0 16px;padding:4px 16px 8px;background:var(--card);border:1px solid var(--line);border-radius:14px}
+.cat h3{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ink);margin:12px 0 4px}
+.cat h3::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--accent);flex:none}
+.cat h3 .n{margin-left:auto;color:var(--muted);font-weight:500;letter-spacing:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr)}
+/* A sheet with a single category flows its rows over two columns instead */
+.cats:has(>.cat:only-child){columns:auto}
+.cat:only-child .grid{display:block;columns:2 400px;column-gap:32px}
+.cat:only-child .row{break-inside:avoid}
+.row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:12px;padding:8px;margin:0 -8px;border-top:1px solid var(--line);align-items:center;border-radius:8px;transition:background .12s}
+.row:first-child{border-top-color:transparent}
+.row:hover{background:color-mix(in srgb,var(--accent) 7%,transparent)}
+.row .k{min-width:0;overflow-wrap:anywhere;display:flex;align-items:center}
+.kv{display:flex;flex-wrap:wrap;align-items:center;gap:4px;min-width:0}
+.row .d{color:var(--ink);min-width:0;overflow-wrap:anywhere;font-size:14px}
+.row .d code{font-size:12px}
+code{font-family:"JetBrains Mono",ui-monospace,"Cascadia Code",Consolas,monospace;background:var(--chip);padding:2px 6px;border-radius:6px;font-size:12.5px}
+.kv>code:first-child{color:var(--accent);font-weight:600;background:color-mix(in srgb,var(--accent) 10%,transparent)}
+kbd{display:inline-block;min-width:26px;text-align:center;font:600 12px/1 "JetBrains Mono",ui-monospace,"Cascadia Code",Consolas,monospace;padding:6px 8px;border-radius:7px;background:var(--kbd);border:1px solid var(--kbd-edge);box-shadow:inset 0 -2px 0 var(--kbd-edge),0 1px 1px rgba(0,0,0,.06);color:var(--ink)}
+.plus,.then,.or{color:var(--muted);font-size:11.5px;margin:0 3px}
 .then,.or{font-style:italic}
-.tag{display:inline-block;font:600 11px/1 ui-monospace,Consolas,monospace;padding:4px 6px;border-radius:6px;background:var(--accent);color:#fff;margin-right:6px;vertical-align:1px}
+.tag{display:inline-block;font:700 10.5px/1 "JetBrains Mono",ui-monospace,Consolas,monospace;padding:4px 6px;border-radius:6px;background:var(--accent);color:#fff;margin-right:6px;vertical-align:1px}
 .hide{display:none!important}
-.empty{color:var(--muted);padding:12px 20px 20px;font-style:italic}
+.empty{color:var(--muted);padding:12px 0;font-style:italic}
 footer{color:rgba(255,255,255,.85);font-size:12px;text-align:center;margin-top:32px;text-shadow:0 1px 2px rgba(0,0,0,.4)}
 footer code{background:rgba(0,0,0,.25);color:#fff}
 .print-only{display:none}
@@ -55,53 +82,71 @@ footer code{background:rgba(0,0,0,.25);color:#fff}
 :root{--neon:#39ff14}
 :root[data-neon="violet"]{--neon:#c04bff}
 :root[data-neon="orange"]{--neon:#ff8a00}
-.row .k{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
-input.star{flex:none;width:16px;height:16px;margin:0 8px 0 0;cursor:pointer;accent-color:var(--neon)}
-label.hl{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:8px 10px;cursor:pointer;white-space:nowrap;font-size:14px}
-label.hl input{accent-color:var(--neon);margin:0}
-.neons{display:inline-flex;gap:4px}
-.neons button{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);cursor:pointer;padding:0}
-.neons button[aria-pressed="true"]{border-color:var(--ink);box-shadow:0 0 8px currentColor}
-button.reset{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:9px 10px;cursor:pointer;font:inherit}
-body.hl-on .row.imp{background:linear-gradient(135deg,#050505 0%,#1c1c1f 55%,#3b3b40 100%);border-top-color:transparent;border-left:3px solid var(--neon);border-radius:10px;margin:3px -12px;padding:10px 12px 10px 9px;box-shadow:0 0 0 1px rgba(255,255,255,.04),0 0 14px -4px var(--neon)}
-body.hl-on .row.imp .d,body.hl-on .row.imp .k,body.hl-on .row.imp .k>code:first-child,body.hl-on .row.imp strong{color:var(--neon);text-shadow:0 0 6px color-mix(in srgb,var(--neon) 55%,transparent)}
+input.star{flex:none;width:15px;height:15px;margin:0 6px 0 0;cursor:pointer;accent-color:var(--neon);opacity:.3;transition:opacity .12s}
+input.star:checked,.row:hover input.star,input.star:focus-visible{opacity:1}
+body.hl-on .row.imp{background:linear-gradient(135deg,#050505 0%,#1c1c1f 55%,#3b3b40 100%);border-top-color:transparent;box-shadow:inset 3px 0 0 var(--neon),0 0 0 1px rgba(255,255,255,.04),0 0 12px -5px var(--neon);margin:3px -8px}
+body.hl-on .row.imp .d,body.hl-on .row.imp .k,body.hl-on .row.imp .kv>code:first-child,body.hl-on .row.imp strong{color:var(--neon);text-shadow:0 0 6px color-mix(in srgb,var(--neon) 50%,transparent)}
 body.hl-on .row.imp code{background:rgba(255,255,255,.08);color:var(--neon)}
-body.hl-on .row.imp kbd{background:#111;border-color:var(--neon);color:var(--neon)}
+body.hl-on .row.imp kbd{background:#111;border-color:var(--neon);box-shadow:inset 0 -2px 0 color-mix(in srgb,var(--neon) 60%,#000);color:var(--neon)}
 body.hl-on .row.imp .plus,body.hl-on .row.imp .then,body.hl-on .row.imp .or{color:#a8a8b0}
 body.hl-on .row.imp+.row{border-top-color:transparent}
-@media (max-width:640px){.row{grid-template-columns:minmax(0,1fr);gap:6px}input[type=search]{flex:1;width:auto;min-width:0}.tools{width:100%}h1{font-size:23px}.hat{width:44px;height:28px}}
-/* Print: A4 pages, light theme, one cheat sheet per page, categories and rows never cut in half */
-@page{size:A4;margin:12mm 11mm 14mm}
+/* "★ Only": show (and print) just the ticked rows; empty categories and sheets disappear */
+body.only-imp .row:not(.imp),body.only-imp .cat:not(:has(.row.imp)),body.only-imp section.tool:not(:has(.row.imp)){display:none}
+body.only-imp .kind::after{content:" · ★ selection"}
+@media (max-width:640px){.wrap{padding-top:16px}header.top{padding:16px}.row{grid-template-columns:minmax(0,1fr);gap:6px}.cats{padding:14px 12px 2px}.cat{padding:4px 12px 8px}input[type=search]{max-width:none}.tools .spacer{display:none}h1{font-size:26px}.hat{width:52px;height:33px}.glabel{width:100%}section.tool>header{padding:16px}.meta{align-items:flex-start}.intro{margin:14px 16px 0}}
+/* Print: A4, ink-friendly light theme, two columns per sheet, one cheat sheet per page, categories and rows never cut in half */
+@page{size:A4;margin:11mm 10mm 13mm;@bottom-left{content:"Tips & Tricks · Straw Hat edition";font:italic 7.5pt system-ui,sans-serif;color:#8a909c}@bottom-right{content:counter(page) " / " counter(pages);font:7.5pt system-ui,sans-serif;color:#8a909c}}
 @media print{
-:root,:root[data-theme="dark"]{--panel:#fff;--ink:#16181d;--muted:#5d6472;--line:#e4e6ea;--chip:#f1f2f5;--kbd:#fff;--kbd-edge:#c9cdd4;--shadow:none;--title:linear-gradient(90deg,#c1121f,#f77f00 55%,#e0a100)}
+:root:not(#_){--panel:#fff;--card:#fff;--ink:#16181d;--muted:#5d6472;--line:#e6e8ec;--chip:#f1f2f5;--kbd:#fff;--kbd-edge:#bfc4cc;--shadow:none;--title:linear-gradient(90deg,#c1121f,#f77f00 55%,#e0a100)}
 *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 html,body{background:#fff!important}
-body{font-size:10pt;line-height:1.4}
-body::after,.tools,nav.tabs,.quote,footer,section.tool::before,input.star{display:none!important}
-body.hl-on .row.imp{margin:2px -6px;padding:5px 8px 5px 6px}
-body:not(.hl-on) .row.imp .k::before{content:"★ ";color:#f77f00}
+body{font-size:8.6pt;line-height:1.35}
+body::after,.tools,nav.tabs,.quote,footer,section.tool::before,input.star,.sub a,.print-only{display:none!important}
 .wrap{max-width:none;padding:0}
-header.top{margin:0 0 6mm;padding:0 0 4mm;border:0;border-bottom:2px solid #f77f00;border-radius:0;box-shadow:none;background:none;backdrop-filter:none}
-h1{font-size:20pt}
-.print-only{display:block}
-section.tool{margin:0;border-radius:10px;box-shadow:none;backdrop-filter:none;overflow:visible;break-inside:auto}
+.glass{background:none;border:0;border-radius:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+header.top{display:flex;padding:0 0 3mm;margin:0 0 5mm;border-bottom:1.5pt solid #f77f00}
+header.top .hat{width:44px;height:28px}
+h1{font-size:19pt}
+.sub{font-size:9pt;margin-top:1mm}
+body.single header.top{display:none}
+section.tool{overflow:visible;margin:0;break-inside:auto}
 section.tool+section.tool{break-before:page}
-section.tool>header{break-after:avoid}
-.cat{break-inside:avoid-page}
-.cat h3{break-after:avoid}
-.row{break-inside:avoid;padding:5px 0}
-kbd{padding:4px 6px;font-size:9pt}
-code{font-size:9pt}
-.print-foot{margin-top:6mm;font-size:8pt;color:#5d6472;text-align:center;font-style:italic}
+section.tool>header{padding:3mm 4mm;margin:0 0 4mm;border:0;border-radius:6px;break-after:avoid;background:color-mix(in srgb,var(--accent) 10%,#fff);box-shadow:inset 4pt 0 0 var(--accent);justify-content:flex-start;flex-wrap:nowrap;align-items:center;gap:4mm}
+body.single section.tool>header .hat{display:block;width:44px;height:28px}
+section.tool>header>div:nth-child(2){flex:1}
+section.tool h2{font-size:16pt}
+.kind{font-size:7.5pt}
+.count{font-size:8pt;padding:1px 7px;background:#fff;border:1px solid var(--accent)}
+.src{font-size:7pt}
+.intro{margin:0 0 4mm;padding:2mm 3mm;font-size:8.5pt;max-width:none}
+.cats{columns:2;column-gap:7mm;padding:0}
+.cat:only-child .grid{columns:2;column-gap:7mm}
+body.only-imp section.tool+section.tool{break-before:auto;margin-top:6mm}
+body.only-imp .row.imp{background:none;box-shadow:none;border-top-color:#e9ebef}
+body.only-imp .row.imp .d{font-weight:400}
+body.only-imp .sub::after{content:" · ★ selection only";font-weight:700;color:#f77f00}
+.cat{break-inside:avoid;margin:0 0 4mm;padding:0;border:0;border-radius:0;background:none}
+.cat h3{margin:0 0 1mm;padding-bottom:1mm;border-bottom:1pt solid var(--accent);color:var(--accent);font-size:7.5pt;break-after:avoid}
+.row{padding:1.1mm 1.2mm;margin:0;gap:2.5mm;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);border-radius:0;border-top:.5pt solid #e9ebef;break-inside:avoid}
+.row .d{font-size:8.6pt}
+.row.imp,body.hl-on .row.imp{background:color-mix(in srgb,var(--accent) 11%,#fff);box-shadow:inset 2pt 0 0 var(--accent);margin:0;border-radius:0 3px 3px 0;border-top-color:transparent}
+.row.imp .k::before{content:"★";color:var(--accent);margin-right:.8mm}
+body.hl-on .row.imp .d,body.hl-on .row.imp .k,body.hl-on .row.imp strong,body.hl-on .row.imp .plus,body.hl-on .row.imp .then,body.hl-on .row.imp .or{color:inherit;text-shadow:none}
+.row.imp .d{font-weight:600}
+body.hl-on .row.imp .kv>code:first-child,.kv>code:first-child{color:var(--accent);background:none;padding:0}
+body.hl-on .row.imp code{background:var(--chip);color:var(--ink)}
+kbd,body.hl-on .row.imp kbd{padding:1.5px 4px;min-width:0;font-size:7.4pt;background:#fff;color:var(--ink);border-color:var(--kbd-edge);box-shadow:inset 0 -1.2px 0 var(--kbd-edge)}
+code{font-size:7.6pt;padding:0 3px}
+.row .d code{font-size:7.4pt}
+.tag{font-size:6.5pt;padding:1.5px 3px}
 }
-</style></head><body><div class="wrap">
-<header class="top"><div class="brand"><svg class="hat" viewBox="0 0 64 40" aria-hidden="true"><ellipse cx="32" cy="30" rx="30" ry="8.5" fill="#f4c542" stroke="#9a6a00" stroke-width="1.2"/><path d="M14 29C14 6 50 6 50 29Z" fill="#f8d76a" stroke="#9a6a00" stroke-width="1.2"/><path d="M14.4 23.5C21 20.5 43 20.5 49.6 23.5L50 29C43 25.8 21 25.8 14 29Z" fill="#d62828"/></svg><div><h1>ClaudeCode Shortcuts</h1><p class="sub"><a href="index.html">← All cheat sheets</a></p><p class="quote">“I’m gonna be King of the Pirates!” — Monkey D. Luffy</p></div></div>
-<div class="tools"><input id="q" type="search" placeholder="Log Pose… filter  ( / )" aria-label="Filter"><label class="hl" title="Highlight the rows ticked as important"><input id="hl" type="checkbox" checked>★ Highlight</label><span class="neons" role="group" aria-label="Highlight color"><button type="button" data-n="green" style="background:#39ff14;color:#39ff14" title="Neon green" aria-label="Neon green"></button><button type="button" data-n="violet" style="background:#c04bff;color:#c04bff" title="Neon violet" aria-label="Neon violet"></button><button type="button" data-n="orange" style="background:#ff8a00;color:#ff8a00" title="Neon orange" aria-label="Neon orange"></button></span><button class="reset" type="button" title="Reset the ticks to the ★ of the Markdown files" aria-label="Reset important ticks">↺</button><button class="print" type="button" aria-label="Print (A4)" title="Print / Save as PDF (A4)">🖨 Print</button><button class="theme" type="button" aria-label="Toggle theme">◐</button></div></header>
-<nav class="tabs"><a href="command-bmad.html" style="--accent:#8b5cf6"><span class="dot"></span>Bmad · Commands<span class="n">63</span></a><a href="command-claude.html" style="--accent:#d97757"><span class="dot"></span>Claude · Commands<span class="n">79</span></a><a href="command-devflow.html" style="--accent:#10b981"><span class="dot"></span>Devflow · Commands<span class="n">9</span></a><a href="command-githubcopilot.html" style="--accent:#2f81f7"><span class="dot"></span>GithubCopilot · Commands<span class="n">42</span></a><a href="command-hve.html" style="--accent:#e11d48"><span class="dot"></span>Hve · Commands<span class="n">39</span></a><a href="command-vscode.html" style="--accent:#0ea5e9"><span class="dot"></span>VsCode · Commands<span class="n">26</span></a><a href="shortcut-claudecode.html" style="--accent:#d97757"><span class="dot"></span>ClaudeCode · Shortcuts<span class="n">19</span></a><a href="shortcut-githubcopilot.html" style="--accent:#2f81f7"><span class="dot"></span>GithubCopilot · Shortcuts<span class="n">11</span></a><a href="shortcut-vscode.html" style="--accent:#0ea5e9"><span class="dot"></span>VsCode · Shortcuts<span class="n">50</span></a><a href="tips-tokencost.html" style="--accent:#eab308"><span class="dot"></span>TokenCost · Tips<span class="n">16</span></a><a href="tips-workflow.html" style="--accent:#84cc16"><span class="dot"></span>Workflow · Tips<span class="n">31</span></a></nav>
-<section class="tool" id="shortcut-claudecode" style="--accent:#d97757">
-<header><div><div class="kind">Shortcuts</div><h2>ClaudeCode Shortcuts</h2></div><span class="src">Shortcut/ClaudeCode/ClaudeCode shortcuts.md · 19 entries</span></header>
-<div class="cat"><div class="grid"><div class="row imp" data-key="shortcut-claudecode||Esc" data-md="1"><div class="k"><input class="star" type="checkbox" checked aria-label="Important" title="Important — tick to highlight"><kbd>Esc</kbd></div><div class="d">Interrupt Claude mid-response</div></div><div class="row imp" data-key="shortcut-claudecode||Esc, Esc" data-md="1"><div class="k"><input class="star" type="checkbox" checked aria-label="Important" title="Important — tick to highlight"><kbd>Esc</kbd><span class="then">then</span><kbd>Esc</kbd></div><div class="d">Rewind — jump back to an earlier message (or clear current input)</div></div><div class="row" data-key="shortcut-claudecode||Ctrl+Esc"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>Esc</kbd></div><div class="d">Focus the Claude Code panel (VS Code)</div></div><div class="row" data-key="shortcut-claudecode||Ctrl+C"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>C</kbd></div><div class="d">Cancel current operation</div></div><div class="row imp" data-key="shortcut-claudecode||Shift+Tab" data-md="1"><div class="k"><input class="star" type="checkbox" checked aria-label="Important" title="Important — tick to highlight"><kbd>Shift</kbd><span class="plus">+</span><kbd>Tab</kbd></div><div class="d">Cycle permission modes (default → accept edits → plan)</div></div><div class="row imp" data-key="shortcut-claudecode||Alt+K" data-md="1"><div class="k"><input class="star" type="checkbox" checked aria-label="Important" title="Important — tick to highlight"><kbd>Alt</kbd><span class="plus">+</span><kbd>K</kbd></div><div class="d">Insert an @-mention of the current editor selection (VS Code)</div></div><div class="row" data-key="shortcut-claudecode||Ctrl+R"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>R</kbd></div><div class="d">Reverse-search the prompt history</div></div><div class="row" data-key="shortcut-claudecode||Up / Down"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><kbd>Up</kbd><span class="or">or</span><kbd>Down</kbd></div><div class="d">Navigate prompt history</div></div><div class="row" data-key="shortcut-claudecode||Shift+Enter"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><kbd>Shift</kbd><span class="plus">+</span><kbd>Enter</kbd></div><div class="d">New line in the prompt (after <code>/terminal-setup</code> in the terminal)</div></div><div class="row" data-key="shortcut-claudecode||\+Enter"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><kbd>\</kbd><span class="plus">+</span><kbd>Enter</kbd></div><div class="d">New line in the prompt (works in every terminal)</div></div><div class="row" data-key="shortcut-claudecode||Ctrl+O"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>O</kbd></div><div class="d">Toggle verbose transcript view</div></div><div class="row" data-key="shortcut-claudecode||Ctrl+T"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>T</kbd></div><div class="d">Show / hide the task (todo) list</div></div><div class="row" data-key="shortcut-claudecode||Ctrl+B"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>B</kbd></div><div class="d">Send a running command to the background</div></div><div class="row" data-key="shortcut-claudecode||Ctrl+G"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>G</kbd></div><div class="d">Edit the prompt in your external editor</div></div><div class="row imp" data-key="shortcut-claudecode||Ctrl+V / Alt+V" data-md="1"><div class="k"><input class="star" type="checkbox" checked aria-label="Important" title="Important — tick to highlight"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>V</kbd><span class="or">or</span><kbd>Alt</kbd><span class="plus">+</span><kbd>V</kbd></div><div class="d">Paste an image from the clipboard (Alt+V on Windows)</div></div><div class="row" data-key="shortcut-claudecode||Alt+P"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><kbd>Alt</kbd><span class="plus">+</span><kbd>P</kbd></div><div class="d">Switch model without clearing the prompt</div></div><div class="row" data-key="shortcut-claudecode||Ctrl+L"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>L</kbd></div><div class="d">Clear the terminal screen (keeps conversation)</div></div><div class="row" data-key="shortcut-claudecode||Ctrl+D"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>D</kbd></div><div class="d">Exit the session</div></div><div class="row" data-key="shortcut-claudecode||Ctrl+]"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>]</kbd></div><div class="d">Reopen the most recent artifact from this session</div></div></div></div><div style="height:12px"></div></section>
-<p class="print-only print-foot">Tips &amp; Tricks · Straw Hat edition · “I’m gonna be King of the Pirates!”</p>
+</style></head><body class="single"><div class="wrap">
+<header class="top glass"><div class="brand"><svg class="hat" viewBox="0 0 64 40" aria-hidden="true"><ellipse cx="32" cy="30" rx="30" ry="8.5" fill="#f4c542" stroke="#9a6a00" stroke-width="1.2"/><path d="M14 29C14 6 50 6 50 29Z" fill="#f8d76a" stroke="#9a6a00" stroke-width="1.2"/><path d="M14.4 23.5C21 20.5 43 20.5 49.6 23.5L50 29C43 25.8 21 25.8 14 29Z" fill="#d62828"/></svg><div><h1>ClaudeCode Shortcuts</h1><p class="sub"><a href="index.html">← All cheat sheets</a></p><p class="quote">“I’m gonna be King of the Pirates!” — Monkey D. Luffy</p></div></div>
+<div class="tools"><input id="q" type="search" placeholder="Log Pose… filter  ( / )" aria-label="Filter"><label class="hl" title="Highlight the rows ticked as important"><input id="hl" type="checkbox" checked>★ Highlight</label><span class="neons" role="group" aria-label="Highlight color"><button type="button" data-n="green" style="background:#39ff14;color:#39ff14" title="Neon green" aria-label="Neon green"></button><button type="button" data-n="violet" style="background:#c04bff;color:#c04bff" title="Neon violet" aria-label="Neon violet"></button><button type="button" data-n="orange" style="background:#ff8a00;color:#ff8a00" title="Neon orange" aria-label="Neon orange"></button></span><button class="reset" type="button" title="Reset the ticks to the ★ of the Markdown files" aria-label="Reset important ticks">↺</button><label class="hl" title="Show and print only the rows ticked as important"><input id="only" type="checkbox">★ Only</label><span class="spacer"></span><button class="print" type="button" aria-label="Print (A4)" title="Print / Save as PDF (A4)">🖨 Print</button><button class="theme" type="button" aria-label="Toggle theme" title="Toggle light / dark">◐</button></div></header>
+<nav class="tabs glass"><div class="grp"><span class="glabel">Commands</span><a href="command-bmad.html" style="--accent:#8b5cf6"><span class="dot"></span>Bmad<span class="n">63</span></a><a href="command-claude.html" style="--accent:#d97757"><span class="dot"></span>Claude<span class="n">79</span></a><a href="command-devflow.html" style="--accent:#10b981"><span class="dot"></span>Devflow<span class="n">9</span></a><a href="command-githubcopilot.html" style="--accent:#2f81f7"><span class="dot"></span>GithubCopilot<span class="n">42</span></a><a href="command-hve.html" style="--accent:#e11d48"><span class="dot"></span>Hve<span class="n">39</span></a><a href="command-vscode.html" style="--accent:#0ea5e9"><span class="dot"></span>VsCode<span class="n">26</span></a></div><div class="grp"><span class="glabel">Shortcuts</span><a href="shortcut-claudecode.html" style="--accent:#d97757" aria-current="page"><span class="dot"></span>ClaudeCode<span class="n">19</span></a><a href="shortcut-githubcopilot.html" style="--accent:#2f81f7"><span class="dot"></span>GithubCopilot<span class="n">11</span></a><a href="shortcut-vscode.html" style="--accent:#0ea5e9"><span class="dot"></span>VsCode<span class="n">50</span></a></div><div class="grp"><span class="glabel">Tips</span><a href="tips-tokencost.html" style="--accent:#eab308"><span class="dot"></span>TokenCost<span class="n">16</span></a><a href="tips-workflow.html" style="--accent:#84cc16"><span class="dot"></span>Workflow<span class="n">31</span></a></div></nav>
+<section class="tool glass" id="shortcut-claudecode" style="--accent:#d97757">
+<header><svg class="hat" viewBox="0 0 64 40" aria-hidden="true"><ellipse cx="32" cy="30" rx="30" ry="8.5" fill="#f4c542" stroke="#9a6a00" stroke-width="1.2"/><path d="M14 29C14 6 50 6 50 29Z" fill="#f8d76a" stroke="#9a6a00" stroke-width="1.2"/><path d="M14.4 23.5C21 20.5 43 20.5 49.6 23.5L50 29C43 25.8 21 25.8 14 29Z" fill="#d62828"/></svg><div><div class="kind">Shortcuts</div><h2>ClaudeCode Shortcuts</h2></div><div class="meta"><span class="count">19 entries</span><span class="src">Shortcut/ClaudeCode/ClaudeCode shortcuts.md</span></div></header>
+<div class="cats"><div class="cat"><div class="grid"><div class="row imp" data-key="shortcut-claudecode||Esc" data-md="1"><div class="k"><input class="star" type="checkbox" checked aria-label="Important" title="Important — tick to highlight"><span class="kv"><kbd>Esc</kbd></span></div><div class="d">Interrupt Claude mid-response</div></div><div class="row imp" data-key="shortcut-claudecode||Esc, Esc" data-md="1"><div class="k"><input class="star" type="checkbox" checked aria-label="Important" title="Important — tick to highlight"><span class="kv"><kbd>Esc</kbd><span class="then">then</span><kbd>Esc</kbd></span></div><div class="d">Rewind — jump back to an earlier message (or clear current input)</div></div><div class="row" data-key="shortcut-claudecode||Ctrl+Esc"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><span class="kv"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>Esc</kbd></span></div><div class="d">Focus the Claude Code panel (VS Code)</div></div><div class="row" data-key="shortcut-claudecode||Ctrl+C"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><span class="kv"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>C</kbd></span></div><div class="d">Cancel current operation</div></div><div class="row imp" data-key="shortcut-claudecode||Shift+Tab" data-md="1"><div class="k"><input class="star" type="checkbox" checked aria-label="Important" title="Important — tick to highlight"><span class="kv"><kbd>Shift</kbd><span class="plus">+</span><kbd>Tab</kbd></span></div><div class="d">Cycle permission modes (default → accept edits → plan)</div></div><div class="row imp" data-key="shortcut-claudecode||Alt+K" data-md="1"><div class="k"><input class="star" type="checkbox" checked aria-label="Important" title="Important — tick to highlight"><span class="kv"><kbd>Alt</kbd><span class="plus">+</span><kbd>K</kbd></span></div><div class="d">Insert an @-mention of the current editor selection (VS Code)</div></div><div class="row" data-key="shortcut-claudecode||Ctrl+R"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><span class="kv"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>R</kbd></span></div><div class="d">Reverse-search the prompt history</div></div><div class="row" data-key="shortcut-claudecode||Up / Down"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><span class="kv"><kbd>Up</kbd><span class="or">or</span><kbd>Down</kbd></span></div><div class="d">Navigate prompt history</div></div><div class="row" data-key="shortcut-claudecode||Shift+Enter"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><span class="kv"><kbd>Shift</kbd><span class="plus">+</span><kbd>Enter</kbd></span></div><div class="d">New line in the prompt (after <code>/terminal-setup</code> in the terminal)</div></div><div class="row" data-key="shortcut-claudecode||\+Enter"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><span class="kv"><kbd>\</kbd><span class="plus">+</span><kbd>Enter</kbd></span></div><div class="d">New line in the prompt (works in every terminal)</div></div><div class="row" data-key="shortcut-claudecode||Ctrl+O"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><span class="kv"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>O</kbd></span></div><div class="d">Toggle verbose transcript view</div></div><div class="row" data-key="shortcut-claudecode||Ctrl+T"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><span class="kv"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>T</kbd></span></div><div class="d">Show / hide the task (todo) list</div></div><div class="row" data-key="shortcut-claudecode||Ctrl+B"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><span class="kv"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>B</kbd></span></div><div class="d">Send a running command to the background</div></div><div class="row" data-key="shortcut-claudecode||Ctrl+G"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><span class="kv"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>G</kbd></span></div><div class="d">Edit the prompt in your external editor</div></div><div class="row imp" data-key="shortcut-claudecode||Ctrl+V / Alt+V" data-md="1"><div class="k"><input class="star" type="checkbox" checked aria-label="Important" title="Important — tick to highlight"><span class="kv"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>V</kbd><span class="or">or</span><kbd>Alt</kbd><span class="plus">+</span><kbd>V</kbd></span></div><div class="d">Paste an image from the clipboard (Alt+V on Windows)</div></div><div class="row" data-key="shortcut-claudecode||Alt+P"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><span class="kv"><kbd>Alt</kbd><span class="plus">+</span><kbd>P</kbd></span></div><div class="d">Switch model without clearing the prompt</div></div><div class="row" data-key="shortcut-claudecode||Ctrl+L"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><span class="kv"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>L</kbd></span></div><div class="d">Clear the terminal screen (keeps conversation)</div></div><div class="row" data-key="shortcut-claudecode||Ctrl+D"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><span class="kv"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>D</kbd></span></div><div class="d">Exit the session</div></div><div class="row" data-key="shortcut-claudecode||Ctrl+]"><div class="k"><input class="star" type="checkbox" aria-label="Important" title="Important — tick to highlight"><span class="kv"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>]</kbd></span></div><div class="d">Reopen the most recent artifact from this session</div></div></div></div></div></section>
 <footer>☠ Set sail on the Grand Line · Generated from the Markdown tables by <code>.claude/skills/tips-visuals/build.mjs</code> — edit the .md files, not this page.</footer>
 </div><script>
 const q=document.getElementById('q');
@@ -123,6 +168,8 @@ box.addEventListener('change',()=>{r.classList.toggle('imp',box.checked);
 if(box.checked===!!r.dataset.md)delete ov[k];else ov[k]=box.checked;st('tt-imp',JSON.stringify(ov))});});
 const hl=document.getElementById('hl'),hv=st('tt-hl');if(hl){hl.checked=hv!=='0';document.body.classList.toggle('hl-on',hl.checked);
 hl.addEventListener('change',()=>{document.body.classList.toggle('hl-on',hl.checked);st('tt-hl',hl.checked?'1':'0')})}
+const on=document.getElementById('only');if(on){on.checked=st('tt-only')==='1';document.body.classList.toggle('only-imp',on.checked);
+on.addEventListener('change',()=>{document.body.classList.toggle('only-imp',on.checked);st('tt-only',on.checked?'1':'0')})}
 const setNeon=n=>{document.documentElement.dataset.neon=n;document.querySelectorAll('.neons button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.n===n))};
 setNeon(st('tt-neon')||'green');
 document.querySelectorAll('.neons button').forEach(x=>x.addEventListener('click',()=>{setNeon(x.dataset.n);st('tt-neon',x.dataset.n)}));
