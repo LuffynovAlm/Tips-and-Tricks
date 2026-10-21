@@ -24,6 +24,7 @@ Output (all files are wiped and rebuilt on each run, so removed tables disappear
 - `## Category` → a group; each table row → one entry (first column = key, second = description)
 - Shortcut files: the key column is turned into `<kbd>` chips. `+` joins keys in a chord, `, ` means "then" (sequence), ` / ` means "or" (alternatives)
 - Command files: inline `` `code` `` is rendered as code chips; a description starting with `[CODE]` (BMad menu code) becomes a colored tag
+- Third column `Important`: `★` (or `x` / `yes` / `oui`) marks the row important. Each row gets a checkbox initialised from it; ticks changed in the page are kept in the browser (`localStorage`), `↺` resets them to the Markdown. The `★ Highlight` toggle and the green / violet / orange swatches style important rows in neon on a dark black→gray gradient. To make a tick permanent, put `★` in the .md. `🖨 Print` gives A4 pages on a white background and keeps the neon highlight in the chosen color. With Highlight off, important rows get an orange `★` instead
 - `\|` inside a cell is a literal pipe
 - New tool folders are picked up automatically; add an accent color for them in `ACCENTS` in `build.mjs` (otherwise gray)
 

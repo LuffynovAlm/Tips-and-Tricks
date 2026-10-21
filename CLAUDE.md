@@ -4,13 +4,13 @@ This directory stores personal reference notes: keyboard shortcuts under `Shortc
 
 ## When the user gives you a keyboard shortcut to remember
 
-Structure: `Shortcut/<ToolName>/<ToolName> shortcuts.md`, one folder per tool, one Markdown table per file (columns: `Shortcut`, `Action`).
+Structure: `Shortcut/<ToolName>/<ToolName> shortcuts.md`, one folder per tool, one Markdown table per file (columns: `Shortcut`, `Action`, `Important`).
 
 Steps:
 
 1. Identify `<ToolName>` from context (e.g. "Claude Code" → `ClaudeCode`, "VS Code" → `VsCode`). Match existing folder naming/casing if a close match already exists under `Shortcut/` — don't create a near-duplicate folder (e.g. `VSCode` vs `VsCode`).
 2. If `Shortcut/<ToolName>/` doesn't exist, create it.
-3. If `Shortcut/<ToolName>/<ToolName> shortcuts.md` doesn't exist, create it with a `# <ToolName> Shortcuts` heading and an empty table (`| Shortcut | Action |` header row).
+3. If `Shortcut/<ToolName>/<ToolName> shortcuts.md` doesn't exist, create it with a `# <ToolName> Shortcuts` heading and an empty table (`| Shortcut | Action | Important |` header row).
 4. Add/update the row for the shortcut the user gave you. If a row for that key combo already exists, update it instead of duplicating.
 5. Don't ask for confirmation for this action — just do it and tell the user in one line what was added/updated and where.
 
@@ -18,7 +18,7 @@ Only touch this pattern when the user is clearly giving/asking about a shortcut 
 
 ## When the user gives you a command to remember
 
-Structure: `Command/<ToolName>/<ToolName> commands.md`, one folder per tool, entries grouped into category sections (`## <Category>`), one Markdown table per category (columns: `Command`, `Description`).
+Structure: `Command/<ToolName>/<ToolName> commands.md`, one folder per tool, entries grouped into category sections (`## <Category>`), one Markdown table per category (columns: `Command`, `Description`, `Important`).
 
 Steps:
 
@@ -33,7 +33,7 @@ Only touch this pattern when the user is clearly giving/asking about a command f
 
 ## When the user gives you a tip / best practice to remember
 
-Structure: `Tips/<Topic>/<Topic> tips.md`, entries grouped into category sections (`## <Category>`), one Markdown table per category (columns: `Tip`, `Why / How`). Same steps as for commands: match existing folders, update instead of duplicating, no confirmation needed.
+Structure: `Tips/<Topic>/<Topic> tips.md`, entries grouped into category sections (`## <Category>`), one Markdown table per category (columns: `Tip`, `Why / How`, `Important`). Same steps as for commands: match existing folders, update instead of duplicating, no confirmation needed.
 
 ## HTML visuals (keep in sync)
 
@@ -41,3 +41,7 @@ Structure: `Tips/<Topic>/<Topic> tips.md`, entries grouped into category section
 
 - After any change to a file under `Command/`, `Shortcut/` or `Tips/`, regenerate: `node .claude/skills/tips-visuals/build.mjs`. A PostToolUse hook in `.claude/settings.json` does this automatically when this folder is the Claude Code project root; when working from another root (e.g. the BMAD-SETUP workspace), run it yourself.
 - When creating a new tool folder, add an accent color for it in `ACCENTS` in `build.mjs`.
+
+## The `Important` column
+
+Every table has a last column `Important`: `★` when the entry is one of the few you use all the time or must not forget, empty otherwise. Keep it sparse (roughly 1 row in 4 at most). When adding a row, decide whether it deserves `★`. In the HTML each row has a checkbox initialised from this column; the "★ Highlight" toggle shows ticked rows in neon green / violet / orange on a dark gradient.

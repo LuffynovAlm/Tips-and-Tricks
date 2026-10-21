@@ -113,7 +113,7 @@ header.top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-conte
 h1{font-size:28px;margin:0;letter-spacing:-.02em;background:var(--title);-webkit-background-clip:text;background-clip:text;color:transparent}
 .sub{color:var(--muted);margin:4px 0 0}
 .quote{margin:4px 0 0;font-size:13px;font-style:italic;color:var(--muted)}
-.tools{display:flex;gap:8px;align-items:center}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 input[type=search]{width:280px;max-width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit}
 button.theme,button.print{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:9px 12px;cursor:pointer;font:inherit;white-space:nowrap}
 button.print:hover,button.theme:hover{border-color:#f77f00}
@@ -148,6 +148,24 @@ kbd{display:inline-block;min-width:26px;text-align:center;font:600 12.5px/1 ui-m
 footer{color:rgba(255,255,255,.85);font-size:12px;text-align:center;margin-top:32px;text-shadow:0 1px 2px rgba(0,0,0,.4)}
 footer code{background:rgba(0,0,0,.25);color:#fff}
 .print-only{display:none}
+/* Important rows: checkbox per row, neon highlight on a dark black→gray gradient when "Highlight" is on */
+:root{--neon:#39ff14}
+:root[data-neon="violet"]{--neon:#c04bff}
+:root[data-neon="orange"]{--neon:#ff8a00}
+.row .k{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+input.star{flex:none;width:16px;height:16px;margin:0 8px 0 0;cursor:pointer;accent-color:var(--neon)}
+label.hl{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:8px 10px;cursor:pointer;white-space:nowrap;font-size:14px}
+label.hl input{accent-color:var(--neon);margin:0}
+.neons{display:inline-flex;gap:4px}
+.neons button{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);cursor:pointer;padding:0}
+.neons button[aria-pressed="true"]{border-color:var(--ink);box-shadow:0 0 8px currentColor}
+button.reset{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:9px 10px;cursor:pointer;font:inherit}
+body.hl-on .row.imp{background:linear-gradient(135deg,#050505 0%,#1c1c1f 55%,#3b3b40 100%);border-top-color:transparent;border-left:3px solid var(--neon);border-radius:10px;margin:3px -12px;padding:10px 12px 10px 9px;box-shadow:0 0 0 1px rgba(255,255,255,.04),0 0 14px -4px var(--neon)}
+body.hl-on .row.imp .d,body.hl-on .row.imp .k,body.hl-on .row.imp .k>code:first-child,body.hl-on .row.imp strong{color:var(--neon);text-shadow:0 0 6px color-mix(in srgb,var(--neon) 55%,transparent)}
+body.hl-on .row.imp code{background:rgba(255,255,255,.08);color:var(--neon)}
+body.hl-on .row.imp kbd{background:#111;border-color:var(--neon);color:var(--neon)}
+body.hl-on .row.imp .plus,body.hl-on .row.imp .then,body.hl-on .row.imp .or{color:#a8a8b0}
+body.hl-on .row.imp+.row{border-top-color:transparent}
 @media (max-width:640px){.row{grid-template-columns:minmax(0,1fr);gap:6px}input[type=search]{flex:1;width:auto;min-width:0}.tools{width:100%}h1{font-size:23px}.hat{width:44px;height:28px}}
 /* Print: A4 pages, light theme, one cheat sheet per page, categories and rows never cut in half */
 @page{size:A4;margin:12mm 11mm 14mm}
@@ -156,7 +174,9 @@ footer code{background:rgba(0,0,0,.25);color:#fff}
 *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 html,body{background:#fff!important}
 body{font-size:10pt;line-height:1.4}
-body::after,.tools,nav.tabs,.quote,footer,section.tool::before{display:none!important}
+body::after,.tools,nav.tabs,.quote,footer,section.tool::before,input.star{display:none!important}
+body.hl-on .row.imp{margin:2px -6px;padding:5px 8px 5px 6px}
+body:not(.hl-on) .row.imp .k::before{content:"★ ";color:#f77f00}
 .wrap{max-width:none;padding:0}
 header.top{margin:0 0 6mm;padding:0 0 4mm;border:0;border-bottom:2px solid #f77f00;border-radius:0;box-shadow:none;background:none;backdrop-filter:none}
 h1{font-size:20pt}
@@ -185,15 +205,31 @@ b&&b.addEventListener('click',()=>{const dark=document.documentElement.dataset.t
 const n=dark?'light':'dark';document.documentElement.dataset.theme=n;try{localStorage.setItem('tt-theme',n)}catch(e){}});
 document.addEventListener('keydown',e=>{if(e.key==='/'&&document.activeElement!==q){e.preventDefault();q&&q.focus()}});
 const p=document.querySelector('button.print');p&&p.addEventListener('click',()=>window.print());
+const st=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){}};
+let ov={};try{ov=JSON.parse(st('tt-imp')||'{}')}catch(e){}
+document.querySelectorAll('.row[data-key]').forEach(r=>{const k=r.dataset.key,box=r.querySelector('input.star');
+if(k in ov){box.checked=ov[k];r.classList.toggle('imp',ov[k])}
+box.addEventListener('change',()=>{r.classList.toggle('imp',box.checked);
+if(box.checked===!!r.dataset.md)delete ov[k];else ov[k]=box.checked;st('tt-imp',JSON.stringify(ov))});});
+const hl=document.getElementById('hl'),hv=st('tt-hl');if(hl){hl.checked=hv!=='0';document.body.classList.toggle('hl-on',hl.checked);
+hl.addEventListener('change',()=>{document.body.classList.toggle('hl-on',hl.checked);st('tt-hl',hl.checked?'1':'0')})}
+const setNeon=n=>{document.documentElement.dataset.neon=n;document.querySelectorAll('.neons button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.n===n))};
+setNeon(st('tt-neon')||'green');
+document.querySelectorAll('.neons button').forEach(x=>x.addEventListener('click',()=>{setNeon(x.dataset.n);st('tt-neon',x.dataset.n)}));
+const rs=document.querySelector('button.reset');rs&&rs.addEventListener('click',()=>{ov={};st('tt-imp','{}');
+document.querySelectorAll('.row[data-key]').forEach(r=>{const m=!!r.dataset.md;r.classList.toggle('imp',m);r.querySelector('input.star').checked=m})});
 const Q=${JSON.stringify(QUOTES)},qe=document.querySelector('.quote');qe&&(qe.textContent='“'+Q[Math.floor(Math.random()*Q.length)].replace(' — ','” — '));
 `;
 
 function renderTool(t) {
   const cats = t.doc.sections.map((s) => {
-    const rows = s.rows.map(([a = '', b = '']) => {
+    const rows = s.rows.map(([a = '', b = '', c = '']) => {
       const left = t.kind === 'shortcut' ? keys(a) : inline(a);
       const right = inline(b).replace(/^\[([A-Z]{1,6})\]\s*/, '<span class="tag">$1</span>');
-      return `<div class="row"><div class="k">${left}</div><div class="d">${right}</div></div>`;
+      // Third column "Important" (★) = default state; the checkbox overrides it per browser.
+      const imp = /★|^(x|yes|oui|true)$/i.test(c.trim());
+      const key = esc(`${t.id}|${slug(s.name)}|${a}`);
+      return `<div class="row${imp ? ' imp' : ''}" data-key="${key}"${imp ? ' data-md="1"' : ''}><div class="k"><input class="star" type="checkbox"${imp ? ' checked' : ''} aria-label="Important" title="Important — tick to highlight">${left}</div><div class="d">${right}</div></div>`;
     }).join('');
     return `<div class="cat">${s.name ? `<h3>${inline(s.name)}</h3>` : ''}<div class="grid">${rows || '<div class="empty">No entries yet.</div>'}</div></div>`;
   }).join('');
@@ -208,7 +244,7 @@ function page(title, subtitle, tools, navTools) {
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title><style>${CSS}</style></head><body><div class="wrap">
 <header class="top"><div class="brand">${HAT}<div><h1>${esc(title)}</h1><p class="sub">${subtitle}</p><p class="quote">“${esc(QUOTES[0]).replace(' — ', '” — ')}</p></div></div>
-<div class="tools"><input id="q" type="search" placeholder="Log Pose… filter  ( / )" aria-label="Filter"><button class="print" type="button" aria-label="Print (A4)" title="Print / Save as PDF (A4)">🖨 Print</button><button class="theme" type="button" aria-label="Toggle theme">◐</button></div></header>
+<div class="tools"><input id="q" type="search" placeholder="Log Pose… filter  ( / )" aria-label="Filter"><label class="hl" title="Highlight the rows ticked as important"><input id="hl" type="checkbox" checked>★ Highlight</label><span class="neons" role="group" aria-label="Highlight color"><button type="button" data-n="green" style="background:#39ff14;color:#39ff14" title="Neon green" aria-label="Neon green"></button><button type="button" data-n="violet" style="background:#c04bff;color:#c04bff" title="Neon violet" aria-label="Neon violet"></button><button type="button" data-n="orange" style="background:#ff8a00;color:#ff8a00" title="Neon orange" aria-label="Neon orange"></button></span><button class="reset" type="button" title="Reset the ticks to the ★ of the Markdown files" aria-label="Reset important ticks">↺</button><button class="print" type="button" aria-label="Print (A4)" title="Print / Save as PDF (A4)">🖨 Print</button><button class="theme" type="button" aria-label="Toggle theme">◐</button></div></header>
 <nav class="tabs">${nav}</nav>
 ${tools.map(renderTool).join('\n')}
 <p class="print-only print-foot">Tips &amp; Tricks · Straw Hat edition · “I’m gonna be King of the Pirates!”</p>
