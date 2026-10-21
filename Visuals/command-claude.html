@@ -1,16 +1,22 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Claude Commands</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet"><style>
-:root{--bg:linear-gradient(180deg,#ffd98a 0%,#ffa36c 16%,#ee6b6b 30%,#9d6fc4 46%,#4f8fd6 64%,#1d5c9e 84%,#123f73 100%);--sun:radial-gradient(circle at 82% 7%,rgba(255,246,214,.95) 0,rgba(255,226,150,.55) 7%,transparent 22%);--panel:rgba(255,255,255,.88);--card:#fff;--ink:#16181d;--muted:#5d6472;--line:#e6e8ec;--chip:#f1f2f5;--kbd:linear-gradient(#fff,#f2f3f6);--kbd-edge:#c9cdd4;--shadow:0 1px 2px rgba(16,24,40,.08),0 12px 32px -8px rgba(16,24,40,.22);--title:linear-gradient(90deg,#c1121f,#f77f00 55%,#e0a100)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:linear-gradient(180deg,#0a0f24 0%,#16224d 30%,#2b2462 55%,#4a1f55 78%,#1a0f2b 100%);--sun:radial-gradient(circle at 82% 7%,rgba(255,236,170,.75) 0,rgba(255,214,110,.25) 5%,transparent 18%);--panel:rgba(20,23,30,.86);--card:#1a1e26;--ink:#e8eaee;--muted:#9aa2b1;--line:#2c313c;--chip:#232833;--kbd:linear-gradient(#2a303c,#222732);--kbd-edge:#3e4553;--shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px -8px rgba(0,0,0,.6);--title:linear-gradient(90deg,#ff5d5d,#ffb347 55%,#ffd86b)}}
-:root[data-theme="dark"]{--bg:linear-gradient(180deg,#0a0f24 0%,#16224d 30%,#2b2462 55%,#4a1f55 78%,#1a0f2b 100%);--sun:radial-gradient(circle at 82% 7%,rgba(255,236,170,.75) 0,rgba(255,214,110,.25) 5%,transparent 18%);--panel:rgba(20,23,30,.86);--card:#1a1e26;--ink:#e8eaee;--muted:#9aa2b1;--line:#2c313c;--chip:#232833;--kbd:linear-gradient(#2a303c,#222732);--kbd-edge:#3e4553;--shadow:0 1px 2px rgba(0,0,0,.5),0 12px 32px -8px rgba(0,0,0,.6);--title:linear-gradient(90deg,#ff5d5d,#ffb347 55%,#ffd86b)}
-*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;background:#123f73}
-body{margin:0;min-height:100vh;background:var(--sun),var(--bg);background-attachment:fixed;color:var(--ink);font:15px/1.55 "Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
-body::after{content:"";position:fixed;left:0;right:0;bottom:0;height:90px;pointer-events:none;z-index:-1;opacity:.35;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 90' preserveAspectRatio='none'%3E%3Cpath d='M0 40 Q150 0 300 40 T600 40 T900 40 T1200 40 V90 H0Z' fill='%23ffffff'/%3E%3C/svg%3E") repeat-x bottom/1200px 90px;animation:sail 18s linear infinite}
-@keyframes sail{to{background-position-x:1200px}}
-@media (prefers-reduced-motion:reduce){body::after{animation:none}}
+:root{--panel:rgba(255,255,255,.56);--card:rgba(255,255,255,.72);--ink:#16181d;--muted:#4a5160;--line:rgba(20,30,50,.11);--chip:rgba(20,30,50,.06);--kbd:linear-gradient(#fff,#f2f3f6);--kbd-edge:#c3c8d0;--shadow:0 1px 2px rgba(16,24,40,.08),0 16px 40px -12px rgba(16,24,40,.35);--title:linear-gradient(90deg,#c1121f,#f77f00 55%,#e0a100);--sky1:#2c3d7e;--sky2:#8a64ad;--sky3:#f2907e;--sky4:#ffd590;--sea1:#f3a874;--sea2:#4f84bd;--sea3:#10386a;--sun1:#fffbea;--sun2:#ffc23d;--glow:rgba(255,214,120,.7);--bird:rgba(60,40,80,.55)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--panel:rgba(16,20,30,.52);--card:rgba(22,26,36,.70);--ink:#e8eaee;--muted:#a3abba;--line:rgba(255,255,255,.10);--chip:rgba(255,255,255,.08);--kbd:linear-gradient(#2a303c,#222732);--kbd-edge:#3e4553;--shadow:0 1px 2px rgba(0,0,0,.5),0 16px 40px -12px rgba(0,0,0,.7);--title:linear-gradient(90deg,#ff5d5d,#ffb347 55%,#ffd86b);--sky1:#060a1c;--sky2:#1a1d48;--sky3:#4d2c5c;--sky4:#b8607a;--sea1:#8c4f6c;--sea2:#1c2c58;--sea3:#050b1e;--sun1:#ffe9c4;--sun2:#ff8a4c;--glow:rgba(255,140,90,.45);--bird:rgba(255,255,255,.35)}}
+:root[data-theme="dark"]{--panel:rgba(16,20,30,.52);--card:rgba(22,26,36,.70);--ink:#e8eaee;--muted:#a3abba;--line:rgba(255,255,255,.10);--chip:rgba(255,255,255,.08);--kbd:linear-gradient(#2a303c,#222732);--kbd-edge:#3e4553;--shadow:0 1px 2px rgba(0,0,0,.5),0 16px 40px -12px rgba(0,0,0,.7);--title:linear-gradient(90deg,#ff5d5d,#ffb347 55%,#ffd86b);--sky1:#060a1c;--sky2:#1a1d48;--sky3:#4d2c5c;--sky4:#b8607a;--sea1:#8c4f6c;--sea2:#1c2c58;--sea3:#050b1e;--sun1:#ffe9c4;--sun2:#ff8a4c;--glow:rgba(255,140,90,.45);--bird:rgba(255,255,255,.35)}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;background:#10386a}
+body{margin:0;min-height:100vh;background:transparent;color:var(--ink);font:15px/1.55 "Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+.scene{position:fixed;inset:0;z-index:-1;pointer-events:none}
+.scene svg{display:block;width:100%;height:100%}
+.ship{transform-box:fill-box;transform-origin:50% 100%;animation:bob 5s ease-in-out infinite alternate}
+@keyframes bob{from{transform:translateY(0) rotate(-1.6deg)}to{transform:translateY(5px) rotate(1.6deg)}}
+.waves{animation:drift 22s linear infinite}
+@keyframes drift{to{transform:translateX(-320px)}}
+.shimmer rect{animation:shim 3.2s ease-in-out infinite alternate}.shimmer rect:nth-child(2n){animation-delay:-1.6s}.shimmer rect:nth-child(3n){animation-duration:4.4s}
+@keyframes shim{from{opacity:.2}to{opacity:.85}}
+@media (prefers-reduced-motion:reduce){.ship,.waves,.shimmer rect{animation:none}}
 a{color:inherit}
 .wrap{max-width:1180px;margin:0 auto;padding:32px 16px 64px}
-.glass{background:var(--panel);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.glass{background:var(--panel);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);-webkit-backdrop-filter:blur(6px) saturate(1.3);backdrop-filter:blur(6px) saturate(1.3)}
 /* Header */
 header.top{padding:22px 24px 16px;margin-bottom:14px}
 .brand{display:flex;gap:16px;align-items:center;min-width:0}
@@ -101,7 +107,7 @@ body.only-imp .kind::after{content:" · ★ selection"}
 *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 html,body{background:#fff!important}
 body{font-size:8.6pt;line-height:1.35}
-body::after,.tools,nav.tabs,.quote,footer,section.tool::before,input.star,.sub a,.print-only{display:none!important}
+.scene,.tools,nav.tabs,.quote,footer,section.tool::before,input.star,.sub a,.print-only{display:none!important}
 .wrap{max-width:none;padding:0}
 .glass{background:none;border:0;border-radius:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
 header.top{display:flex;padding:0 0 3mm;margin:0 0 5mm;border-bottom:1.5pt solid #f77f00}
@@ -140,7 +146,45 @@ code{font-size:7.6pt;padding:0 3px}
 .row .d code{font-size:7.4pt}
 .tag{font-size:6.5pt;padding:1.5px 3px}
 }
-</style></head><body class="single"><div class="wrap">
+</style></head><body class="single"><div class="scene" aria-hidden="true"><svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--sky1)"/><stop offset=".45" style="stop-color:var(--sky2)"/><stop offset=".8" style="stop-color:var(--sky3)"/><stop offset="1" style="stop-color:var(--sky4)"/></linearGradient>
+<linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--sea1)"/><stop offset=".3" style="stop-color:var(--sea2)"/><stop offset="1" style="stop-color:var(--sea3)"/></linearGradient>
+<radialGradient id="sun"><stop offset="0" style="stop-color:var(--sun1)"/><stop offset="1" style="stop-color:var(--sun2)"/></radialGradient>
+<radialGradient id="glow"><stop offset="0" style="stop-color:var(--glow)"/><stop offset="1" style="stop-color:var(--glow);stop-opacity:0"/></radialGradient></defs>
+<rect width="1600" height="561" fill="url(#sky)"/>
+<circle cx="1080" cy="560" r="360" fill="url(#glow)"/><circle cx="1080" cy="560" r="80" fill="url(#sun)"/>
+<g fill="#fff" opacity=".22"><ellipse cx="300" cy="210" rx="170" ry="16"/><ellipse cx="390" cy="194" rx="90" ry="13"/><ellipse cx="1320" cy="320" rx="210" ry="14"/><ellipse cx="1240" cy="306" rx="80" ry="10"/><ellipse cx="760" cy="130" rx="130" ry="9"/></g>
+<g fill="none" style="stroke:var(--bird)" stroke-width="2.5" stroke-linecap="round"><path d="M900 340q10-10 20 0q10-10 20 0"/><path d="M958 306q7-7 14 0q7-7 14 0"/><path d="M866 296q6-6 12 0q6-6 12 0"/></g>
+<rect y="560" width="1600" height="340" fill="url(#sea)"/>
+<g class="shimmer" style="fill:var(--sun1)"><rect x="995" y="568" width="170" height="4" rx="2"/><rect x="1010" y="580" width="140" height="3" rx="2"/><rect x="985" y="594" width="190" height="4" rx="2"/><rect x="1020" y="612" width="120" height="3" rx="2"/><rect x="1000" y="634" width="160" height="4" rx="2"/><rect x="1030" y="662" width="100" height="3" rx="2"/><rect x="1010" y="696" width="140" height="4" rx="2"/><rect x="1040" y="738" width="80" height="3" rx="2"/><rect x="1020" y="788" width="120" height="4" rx="2"/></g>
+<g class="waves" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><g stroke-opacity=".16"><path d="M-320 600 q40 -5 80 0 t80 0 q40 -5 80 0 t80 0 q40 -5 80 0 t80 0 q40 -5 80 0 t80 0 q40 -5 80 0 t80 0 q40 -5 80 0 t80 0 q40 -5 80 0 t80 0 q40 -5 80 0 t80 0 q40 -5 80 0 t80 0 q40 -5 80 0 t80 0 q40 -5 80 0 t80 0 q40 -5 80 0 t80 0 q40 -5 80 0 t80 0 q40 -5 80 0 t80 0"/><path d="M-640 690 q80 -7 160 0 t160 0 q80 -7 160 0 t160 0 q80 -7 160 0 t160 0 q80 -7 160 0 t160 0 q80 -7 160 0 t160 0 q80 -7 160 0 t160 0 q80 -7 160 0 t160 0 q80 -7 160 0 t160 0 q80 -7 160 0 t160 0"/></g><g stroke-opacity=".12"><path d="M-640 800 q80 -9 160 0 t160 0 q80 -9 160 0 t160 0 q80 -9 160 0 t160 0 q80 -9 160 0 t160 0 q80 -9 160 0 t160 0 q80 -9 160 0 t160 0 q80 -9 160 0 t160 0 q80 -9 160 0 t160 0 q80 -9 160 0 t160 0"/></g></g>
+<g transform="translate(330 580) scale(-.7 .7)"><g class="ship">
+<ellipse cx="160" cy="12" rx="175" ry="11" fill="#000" opacity=".18"/>
+<g stroke="#3b2a1a" stroke-width="1.3" opacity=".75"><path d="M153 -262L338 -96M153 -262L22 -118M153 -232L286 -68"/></g>
+<rect x="150" y="-266" width="6" height="228" fill="#6b4423"/>
+<path d="M156 -268Q172 -273 188 -264Q172 -257 156 -259Z" fill="#1c1c1c"/>
+<path d="M8 -88L58 -88L60 -40L228 -40Q262 -44 284 -64L292 -58Q284 -6 236 8L64 8Q22 4 8 -88Z" fill="#b9824a" stroke="#5a3a1c" stroke-width="2"/>
+<path d="M22 -24Q140 -12 268 -34M40 -8Q140 2 250 -14" fill="none" stroke="#8a5a2e" stroke-width="1.6"/>
+<path d="M58 -47L228 -47Q260 -51 283 -71" fill="none" stroke="#efdcb4" stroke-width="3.5" stroke-linecap="round"/>
+<rect x="12" y="-120" width="48" height="32" rx="3" fill="#c99559" stroke="#5a3a1c" stroke-width="2"/>
+<path d="M6 -120L66 -120L60 -130L12 -130Z" fill="#8a5a2e"/>
+<rect x="20" y="-112" width="11" height="10" rx="2" fill="#ffe08a"/><rect x="40" y="-112" width="11" height="10" rx="2" fill="#ffe08a"/>
+<path d="M286 -62L340 -98" stroke="#6b4423" stroke-width="4" stroke-linecap="round"/>
+<path d="M92 -220L214 -220M92 -82L214 -82M118 -244L188 -244" stroke="#6b4423" stroke-width="4" stroke-linecap="round"/>
+<path d="M120 -242Q153 -248 186 -242L182 -224Q153 -229 124 -224Z" fill="#f8f3e6" stroke="#cbbfa6"/>
+<path d="M96 -218Q155 -228 210 -218Q226 -150 212 -84Q155 -74 98 -84Q84 -150 96 -218Z" fill="#f8f3e6" stroke="#cbbfa6" stroke-width="1.5"/>
+<g stroke="#1c1c1c" stroke-width="6" stroke-linecap="round"><path d="M130 -124L176 -170M176 -124L130 -170"/></g>
+<circle cx="153" cy="-146" r="16" fill="#1c1c1c"/><rect x="145" y="-134" width="16" height="9" rx="3" fill="#1c1c1c"/>
+<circle cx="147" cy="-146" r="4" fill="#f8f3e6"/><circle cx="159" cy="-146" r="4" fill="#f8f3e6"/>
+<path d="M140 -158Q153 -178 166 -158Z" fill="#f4c542"/><rect x="141" y="-161" width="24" height="4" fill="#d62828"/><ellipse cx="153" cy="-158" rx="21" ry="4" fill="#f4c542"/>
+<circle cx="300" cy="-70" r="13" fill="#f5efe2" stroke="#8a7a5a" stroke-width="1.5"/>
+<circle cx="295" cy="-82" r="5" fill="#f5efe2"/><circle cx="304" cy="-83" r="5" fill="#f5efe2"/>
+<ellipse cx="312" cy="-65" rx="7" ry="5.5" fill="#f5efe2" stroke="#8a7a5a" stroke-width="1.5"/>
+<circle cx="303" cy="-72" r="1.8" fill="#333"/>
+<circle cx="291" cy="-70" r="6.5" fill="none" stroke="#c9a36b" stroke-width="3"/><circle cx="291" cy="-70" r="2.2" fill="#c9a36b"/>
+<path d="M-4 4Q150 20 300 -12" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+</g></g>
+</svg></div><div class="wrap">
 <header class="top glass"><div class="brand"><svg class="hat" viewBox="0 0 64 40" aria-hidden="true"><ellipse cx="32" cy="30" rx="30" ry="8.5" fill="#f4c542" stroke="#9a6a00" stroke-width="1.2"/><path d="M14 29C14 6 50 6 50 29Z" fill="#f8d76a" stroke="#9a6a00" stroke-width="1.2"/><path d="M14.4 23.5C21 20.5 43 20.5 49.6 23.5L50 29C43 25.8 21 25.8 14 29Z" fill="#d62828"/></svg><div><h1>Claude Commands</h1><p class="sub"><a href="index.html">← All cheat sheets</a></p><p class="quote">“I’m gonna be King of the Pirates!” — Monkey D. Luffy</p></div></div>
 <div class="tools"><input id="q" type="search" placeholder="Log Pose… filter  ( / )" aria-label="Filter"><label class="hl" title="Highlight the rows ticked as important"><input id="hl" type="checkbox" checked>★ Highlight</label><span class="neons" role="group" aria-label="Highlight color"><button type="button" data-n="green" style="background:#39ff14;color:#39ff14" title="Neon green" aria-label="Neon green"></button><button type="button" data-n="violet" style="background:#c04bff;color:#c04bff" title="Neon violet" aria-label="Neon violet"></button><button type="button" data-n="orange" style="background:#ff8a00;color:#ff8a00" title="Neon orange" aria-label="Neon orange"></button></span><button class="reset" type="button" title="Reset the ticks to the ★ of the Markdown files" aria-label="Reset important ticks">↺</button><label class="hl" title="Show and print only the rows ticked as important"><input id="only" type="checkbox">★ Only</label><span class="spacer"></span><button class="print" type="button" aria-label="Print (A4)" title="Print / Save as PDF (A4)">🖨 Print</button><button class="theme" type="button" aria-label="Toggle theme" title="Toggle light / dark">◐</button></div></header>
 <nav class="tabs glass"><div class="grp"><span class="glabel">Commands</span><a href="command-bmad.html" style="--accent:#8b5cf6"><span class="dot"></span>Bmad<span class="n">63</span></a><a href="command-claude.html" style="--accent:#d97757" aria-current="page"><span class="dot"></span>Claude<span class="n">79</span></a><a href="command-devflow.html" style="--accent:#10b981"><span class="dot"></span>Devflow<span class="n">9</span></a><a href="command-githubcopilot.html" style="--accent:#2f81f7"><span class="dot"></span>GithubCopilot<span class="n">42</span></a><a href="command-hve.html" style="--accent:#e11d48"><span class="dot"></span>Hve<span class="n">39</span></a><a href="command-vscode.html" style="--accent:#0ea5e9"><span class="dot"></span>VsCode<span class="n">26</span></a></div><div class="grp"><span class="glabel">Shortcuts</span><a href="shortcut-claudecode.html" style="--accent:#d97757"><span class="dot"></span>ClaudeCode<span class="n">19</span></a><a href="shortcut-githubcopilot.html" style="--accent:#2f81f7"><span class="dot"></span>GithubCopilot<span class="n">11</span></a><a href="shortcut-vscode.html" style="--accent:#0ea5e9"><span class="dot"></span>VsCode<span class="n">50</span></a></div><div class="grp"><span class="glabel">Tips</span><a href="tips-tokencost.html" style="--accent:#eab308"><span class="dot"></span>TokenCost<span class="n">16</span></a><a href="tips-workflow.html" style="--accent:#84cc16"><span class="dot"></span>Workflow<span class="n">31</span></a></div></nav>
