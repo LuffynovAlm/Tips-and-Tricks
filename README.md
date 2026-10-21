@@ -18,11 +18,18 @@ Filter with <kbd>/</kbd>, switch light/dark with ◐, and use one page per tool 
 | 🩵 **VS Code** | [VsCode commands](Command/VsCode/VsCode%20commands.md): `code` CLI, Command Palette, Quick Open prefixes | [vsCode shortcuts](Shortcut/VsCode/vsCode%20shortcuts.md) |
 | 🟢 **Devflow** | [Devflow commands](Command/Devflow/Devflow%20commands.md): state gates and Jira sync | — |
 
+### 💡 Tips
+
+| Topic | |
+|---|---|
+| 🟡 **Token & Cost** | [TokenCost tips](Tips/TokenCost/TokenCost%20tips.md): **always put the AI cost of a conversation in the task's deliverables**, plus how to spend fewer tokens with Claude Code and Copilot |
+
 ## 🗂️ Structure
 
 ```
 Command/<Tool>/<Tool> commands.md     ← typed commands, one "## Category" + table per group
 Shortcut/<Tool>/<Tool> shortcuts.md   ← keyboard shortcuts, one table
+Tips/<Topic>/<Topic> tips.md          ← best practices, "## Category" + Tip | Why / How table
 Visuals/                              ← generated HTML (do not edit by hand)
 .claude/skills/tips-visuals/          ← the generator skill
 ```
@@ -40,8 +47,8 @@ The Markdown tables are the **single source of truth**. The `tips-visuals` skill
 
 ```
  Command/*.md ─┐
-               ├──▶  build.mjs  ──▶  Visuals/index.html          (everything, one page)
-Shortcut/*.md ─┘                     Visuals/<kind>-<tool>.html  (one page per sheet)
+Shortcut/*.md ─┼──▶  build.mjs  ──▶  Visuals/index.html          (everything, one page)
+    Tips/*.md ─┘                     Visuals/<kind>-<tool>.html  (one page per sheet)
 ```
 
 ### What it renders
@@ -62,7 +69,7 @@ You can also ask Claude Code to *"sync the visuals"*. Every run wipes `Visuals/`
 
 ### Staying in sync automatically
 
-[.claude/settings.json](.claude/settings.json) has a **PostToolUse hook**. When Claude Code runs with this folder as its project root, any edit to a file under `Command/` or `Shortcut/` rebuilds the visuals right away. Edits to other files are ignored.
+[.claude/settings.json](.claude/settings.json) has a **PostToolUse hook**. When Claude Code runs with this folder as its project root, any edit to a file under `Command/`, `Shortcut/` or `Tips/` rebuilds the visuals right away. Edits to other files are ignored.
 
 If you edit outside Claude Code, or from another root folder, run the command above before committing.
 

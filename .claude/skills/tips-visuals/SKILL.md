@@ -1,11 +1,11 @@
 ---
 name: tips-visuals
-description: Regenerates the styled HTML cheat sheets in Visuals/ from the Markdown tables in Command/ and Shortcut/. Use when the user says "generate the visuals", "update the HTML", "sync the visuals", or after any change to a commands/shortcuts .md file.
+description: Regenerates the styled HTML cheat sheets in Visuals/ from the Markdown tables in Command/, Shortcut/ and Tips/. Use when the user says "generate the visuals", "update the HTML", "sync the visuals", or after any change to a commands/shortcuts .md file.
 ---
 
 # Tips Visuals
 
-The Markdown tables under `Command/<Tool>/` and `Shortcut/<Tool>/` are the single source of truth. `Visuals/*.html` is a generated view of them — never edit it by hand.
+The Markdown tables under `Command/<Tool>/`, `Shortcut/<Tool>/` and `Tips/<Topic>/` are the single source of truth. `Visuals/*.html` is a generated view of them — never edit it by hand.
 
 ## Run
 
@@ -16,7 +16,7 @@ node .claude/skills/tips-visuals/build.mjs
 Output (all files are wiped and rebuilt on each run, so removed tables disappear too):
 
 - `Visuals/index.html` — every cheat sheet on one page, with filter (`/` to focus) and light/dark toggle
-- `Visuals/<command|shortcut>-<tool>.html` — one page per Markdown file
+- `Visuals/<command|shortcut|tips>-<tool>.html` — one page per Markdown file
 
 ## Rendering rules (what the script expects from the Markdown)
 

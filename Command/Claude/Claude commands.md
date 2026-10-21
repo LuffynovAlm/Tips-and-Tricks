@@ -11,6 +11,22 @@ Built-in Claude Code slash commands (typed inside a session) and CLI commands/fl
 | `/usage-credits` | Check or manage your extra usage credit balance and spend limits |
 | `/context` | Visualize current active context window usage |
 
+## Tokens & Cost
+
+| Command | Description |
+|---|---|
+| `/cost` | Token and dollar cost of the current session — copy it into the deliverable before closing |
+| `/context` | See what fills the context (system prompt, MCP tools, memory files, messages) to spot token hogs |
+| `/compact <focus>` | Summarize the conversation, keeping what you name (e.g. `/compact keep the API decisions`) |
+| `/clear` | Drop all context between unrelated tasks — the cheapest token is the one you don't resend |
+| `/model haiku` / `/model sonnet` | Switch to a cheaper model for routine work |
+| `/effort low` | Lower reasoning effort (fewer thinking tokens) for simple tasks |
+| `/mcp` | Disable MCP servers you don't use — their tool definitions use context on every request |
+| `/statusline` | Show session cost / context % permanently in the status line |
+| `claude --max-budget-usd <amount>` | Hard spending cap for the session |
+| `claude -p "query" --output-format json` | Headless run whose JSON result includes `total_cost_usd` and token `usage` — log it in CI |
+| `npx ccusage@latest` | Community tool: daily / per-session token and cost report from local Claude Code logs |
+
 ## Configuration
 
 | Command | Description |

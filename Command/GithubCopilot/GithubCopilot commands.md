@@ -58,4 +58,17 @@ Typed in Copilot Chat (VS Code) unless noted otherwise.
 | `copilot` | Start an interactive Copilot CLI session |
 | `copilot -p "query"` | Run a one-off prompt non-interactively |
 
+## Tokens & Cost
+
+| Command | Description |
+|---|---|
+| `/usage` (CLI) | Session stats: GitHub AI Credits used, duration, lines edited, tokens per model. May undercount after compaction, so check the account billing page for the real figure |
+| `/session` (CLI) | Current session info and stats |
+| `/context` (CLI) | Visual breakdown of token usage and remaining context |
+| `/compact` (CLI) | Compress the conversation history to free context |
+| `/model` (CLI) | Switch model. Since June 2026 the cost depends on the model and on the tokens used |
+| `/clear` | Start fresh between unrelated tasks (Chat and CLI) |
+| Copilot status bar icon (VS Code) | Live view of your Copilot usage / quota |
+| GitHub Settings → Billing and licensing | Authoritative monthly Copilot usage and downloadable usage reports |
+
 <!-- Add new commands above this line, one row per entry, under the right category (create a new category section if none fits). -->

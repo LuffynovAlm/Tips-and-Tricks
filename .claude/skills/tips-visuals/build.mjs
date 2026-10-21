@@ -10,8 +10,9 @@ const OUT = path.join(ROOT, 'Visuals');
 const KINDS = [
   { dir: 'Command', label: 'Commands', kind: 'command' },
   { dir: 'Shortcut', label: 'Shortcuts', kind: 'shortcut' },
+  { dir: 'Tips', label: 'Tips', kind: 'tip' },
 ];
-const ACCENTS = { Bmad: '#8b5cf6', Claude: '#d97757', ClaudeCode: '#d97757', GithubCopilot: '#2f81f7', VsCode: '#0ea5e9', Devflow: '#10b981' };
+const ACCENTS = { TokenCost: '#eab308',Bmad: '#8b5cf6', Claude: '#d97757', ClaudeCode: '#d97757', GithubCopilot: '#2f81f7', VsCode: '#0ea5e9', Devflow: '#10b981' };
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -175,7 +176,7 @@ if (process.argv.includes('--hook')) {
   let input = {};
   try { input = JSON.parse(fs.readFileSync(0, 'utf8') || '{}'); } catch {}
   const rel = path.relative(ROOT, path.resolve(input.tool_input?.file_path || '')).replace(/\\/g, '/');
-  if (!/^(Command|Shortcut)\/.+\.md$/i.test(rel)) process.exit(0);
+  if (!/^(Command|Shortcut|Tips)\/.+\.md$/i.test(rel)) process.exit(0);
 }
 
 const tools = collect();
