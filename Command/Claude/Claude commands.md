@@ -127,6 +127,7 @@ Built-in Claude Code slash commands (typed inside a session) and CLI commands/fl
 | `claude -p "query" --output-format json` | One-off query with JSON output (also `stream-json`) |
 | `claude -c` / `--continue` | Continue the most recent conversation in the current directory |
 | `claude -r <session>` / `--resume` | Resume a specific session by ID or name |
+| `claude -r <session> --fork-session` | Resume into a new session ID, leaving the original conversation untouched |
 | `claude --model <model>` | Start a session with a specific model |
 | `claude --effort <level>` | Start a session with a set reasoning effort level |
 | `claude --permission-mode <mode>` | Start in a specific permission mode (e.g. auto, manual, plan) |

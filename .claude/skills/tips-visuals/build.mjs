@@ -12,7 +12,7 @@ const KINDS = [
   { dir: 'Shortcut', label: 'Shortcuts', kind: 'shortcut' },
   { dir: 'Tips', label: 'Tips', kind: 'tip' },
 ];
-const ACCENTS = { TokenCost: '#eab308',Bmad: '#8b5cf6', Claude: '#d97757', ClaudeCode: '#d97757', GithubCopilot: '#2f81f7', VsCode: '#0ea5e9', Devflow: '#10b981' };
+const ACCENTS = { TokenCost: '#eab308',Bmad: '#8b5cf6', Claude: '#d97757', ClaudeCode: '#d97757', GithubCopilot: '#2f81f7', VsCode: '#0ea5e9', Devflow: '#10b981', Hve: '#e11d48', Workflow: '#84cc16' };
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');

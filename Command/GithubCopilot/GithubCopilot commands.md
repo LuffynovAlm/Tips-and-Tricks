@@ -57,6 +57,9 @@ Typed in Copilot Chat (VS Code) unless noted otherwise.
 | `npm install -g @github/copilot` | Install the Copilot CLI |
 | `copilot` | Start an interactive Copilot CLI session |
 | `copilot -p "query"` | Run a one-off prompt non-interactively |
+| `copilot --continue` | Reopen the most recent CLI session |
+| `copilot --resume` | Pick a previous CLI session to resume |
+| `/resume` (CLI) | Switch to a previous session from inside the CLI |
 
 ## Tokens & Cost
 

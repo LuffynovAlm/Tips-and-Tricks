@@ -17,12 +17,14 @@ Filter with <kbd>/</kbd>, switch light/dark with ◐, and use one page per tool 
 | 🔵 **GitHub Copilot** | [GithubCopilot commands](Command/GithubCopilot/GithubCopilot%20commands.md): `/` commands, `@` participants, `#` variables, CLI | [GithubCopilot shortcuts](Shortcut/GithubCopilot/GithubCopilot%20shortcuts.md) |
 | 🩵 **VS Code** | [VsCode commands](Command/VsCode/VsCode%20commands.md): `code` CLI, Command Palette, Quick Open prefixes | [vsCode shortcuts](Shortcut/VsCode/vsCode%20shortcuts.md) |
 | 🟢 **Devflow** | [Devflow commands](Command/Devflow/Devflow%20commands.md): state gates and Jira sync | — |
+| 🔴 **HVE (hve-core)** | [Hve commands](Command/Hve/Hve%20commands.md): `hve.ps1` install, RPI skills (Claude Code), RPI prompts/agents (Copilot), `.copilot-tracking` artifacts | — |
 
 ### 💡 Tips
 
 | Topic | |
 |---|---|
 | 🟡 **Token & Cost** | [TokenCost tips](Tips/TokenCost/TokenCost%20tips.md): **always put the AI cost of a conversation in the task's deliverables**, plus how to spend fewer tokens with Claude Code and Copilot |
+| 🟢 **Workflow** | [Workflow tips](Tips/Workflow/Workflow%20tips.md): the most effective commands — `bmad-help` → `bmad-create-story` → `bmad-dev-story`, `rpi-review`, and how to join an existing Claude Code / Copilot session |
 
 ## 🗂️ Structure
 
