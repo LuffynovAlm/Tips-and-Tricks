@@ -1,23 +1,32 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Devflow Commands</title><style>
-:root{--bg:#f7f7f8;--panel:#fff;--ink:#16181d;--muted:#5d6472;--line:#e4e6ea;--chip:#f1f2f5;--kbd:#fff;--kbd-edge:#c9cdd4;--shadow:0 1px 2px rgba(16,24,40,.06),0 4px 16px rgba(16,24,40,.05)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1014;--panel:#161920;--ink:#e8eaee;--muted:#9aa2b1;--line:#262a33;--chip:#1f232c;--kbd:#232833;--kbd-edge:#3a404d;--shadow:0 1px 2px rgba(0,0,0,.4)}}
-:root[data-theme="dark"]{--bg:#0e1014;--panel:#161920;--ink:#e8eaee;--muted:#9aa2b1;--line:#262a33;--chip:#1f232c;--kbd:#232833;--kbd-edge:#3a404d;--shadow:0 1px 2px rgba(0,0,0,.4)}
-*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+:root{--bg:linear-gradient(180deg,#ffd98a 0%,#ffa36c 16%,#ee6b6b 30%,#9d6fc4 46%,#4f8fd6 64%,#1d5c9e 84%,#123f73 100%);--sun:radial-gradient(circle at 82% 7%,rgba(255,246,214,.95) 0,rgba(255,226,150,.55) 7%,transparent 22%);--panel:rgba(255,255,255,.86);--ink:#16181d;--muted:#5d6472;--line:#e4e6ea;--chip:#f1f2f5;--kbd:#fff;--kbd-edge:#c9cdd4;--shadow:0 2px 6px rgba(16,24,40,.10),0 10px 30px rgba(16,24,40,.14);--title:linear-gradient(90deg,#c1121f,#f77f00 55%,#e0a100)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:linear-gradient(180deg,#0a0f24 0%,#16224d 30%,#2b2462 55%,#4a1f55 78%,#1a0f2b 100%);--sun:radial-gradient(circle at 82% 7%,rgba(255,236,170,.75) 0,rgba(255,214,110,.25) 5%,transparent 18%);--panel:rgba(22,25,32,.84);--ink:#e8eaee;--muted:#9aa2b1;--line:#2c313c;--chip:#1f232c;--kbd:#232833;--kbd-edge:#3a404d;--shadow:0 2px 6px rgba(0,0,0,.45),0 10px 30px rgba(0,0,0,.35);--title:linear-gradient(90deg,#ff5d5d,#ffb347 55%,#ffd86b)}}
+:root[data-theme="dark"]{--bg:linear-gradient(180deg,#0a0f24 0%,#16224d 30%,#2b2462 55%,#4a1f55 78%,#1a0f2b 100%);--sun:radial-gradient(circle at 82% 7%,rgba(255,236,170,.75) 0,rgba(255,214,110,.25) 5%,transparent 18%);--panel:rgba(22,25,32,.84);--ink:#e8eaee;--muted:#9aa2b1;--line:#2c313c;--chip:#1f232c;--kbd:#232833;--kbd-edge:#3a404d;--shadow:0 2px 6px rgba(0,0,0,.45),0 10px 30px rgba(0,0,0,.35);--title:linear-gradient(90deg,#ff5d5d,#ffb347 55%,#ffd86b)}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;background:#123f73}
+body{margin:0;min-height:100vh;background:var(--sun),var(--bg);background-attachment:fixed;color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body::after{content:"";position:fixed;left:0;right:0;bottom:0;height:90px;pointer-events:none;z-index:-1;opacity:.35;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 90' preserveAspectRatio='none'%3E%3Cpath d='M0 40 Q150 0 300 40 T600 40 T900 40 T1200 40 V90 H0Z' fill='%23ffffff'/%3E%3C/svg%3E") repeat-x bottom/1200px 90px;animation:sail 18s linear infinite}
+@keyframes sail{to{background-position-x:1200px}}
+@media (prefers-reduced-motion:reduce){body::after{animation:none}}
 a{color:inherit}
 .wrap{max-width:1100px;margin:0 auto;padding:32px 16px 64px}
-header.top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:24px}
-h1{font-size:28px;margin:0;letter-spacing:-.02em}
+header.top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:20px;padding:18px 20px;background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.brand{display:flex;gap:14px;align-items:center;min-width:0}
+.hat{width:58px;height:36px;flex:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25));transform:rotate(-8deg)}
+h1{font-size:28px;margin:0;letter-spacing:-.02em;background:var(--title);-webkit-background-clip:text;background-clip:text;color:transparent}
 .sub{color:var(--muted);margin:4px 0 0}
+.quote{margin:4px 0 0;font-size:13px;font-style:italic;color:var(--muted)}
 .tools{display:flex;gap:8px;align-items:center}
 input[type=search]{width:280px;max-width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit}
-button.theme{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:9px 12px;cursor:pointer;font:inherit}
+button.theme,button.print{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:9px 12px;cursor:pointer;font:inherit;white-space:nowrap}
+button.print:hover,button.theme:hover{border-color:#f77f00}
 nav.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
 nav.tabs a{text-decoration:none;padding:7px 12px;border-radius:999px;background:var(--panel);border:1px solid var(--line);font-size:14px;display:inline-flex;gap:8px;align-items:center}
 nav.tabs a .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
 nav.tabs a .n{color:var(--muted);font-variant-numeric:tabular-nums}
-section.tool{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);margin:0 0 28px;overflow:hidden;border-top:4px solid var(--accent)}
+nav.tabs a{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+section.tool{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);margin:0 0 28px;overflow:hidden;border-top:4px solid var(--accent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+section.tool::before{content:"☠";position:absolute;right:18px;bottom:6px;font-size:96px;line-height:1;color:var(--accent);opacity:.06;pointer-events:none}
 section.tool>header{padding:18px 20px 6px;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between}
 section.tool h2{margin:0;font-size:20px}
 .kind{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);font-weight:600}
@@ -39,16 +48,41 @@ kbd{display:inline-block;min-width:26px;text-align:center;font:600 12.5px/1 ui-m
 .tag{display:inline-block;font:600 11px/1 ui-monospace,Consolas,monospace;padding:4px 6px;border-radius:6px;background:var(--accent);color:#fff;margin-right:6px;vertical-align:1px}
 .hide{display:none!important}
 .empty{color:var(--muted);padding:12px 20px 20px;font-style:italic}
-footer{color:var(--muted);font-size:12px;text-align:center;margin-top:32px}
-@media (max-width:640px){.row{grid-template-columns:minmax(0,1fr);gap:6px}input[type=search]{width:100%}.tools{width:100%}h1{font-size:23px}}
+footer{color:rgba(255,255,255,.85);font-size:12px;text-align:center;margin-top:32px;text-shadow:0 1px 2px rgba(0,0,0,.4)}
+footer code{background:rgba(0,0,0,.25);color:#fff}
+.print-only{display:none}
+@media (max-width:640px){.row{grid-template-columns:minmax(0,1fr);gap:6px}input[type=search]{flex:1;width:auto;min-width:0}.tools{width:100%}h1{font-size:23px}.hat{width:44px;height:28px}}
+/* Print: A4 pages, light theme, one cheat sheet per page, categories and rows never cut in half */
+@page{size:A4;margin:12mm 11mm 14mm}
+@media print{
+:root,:root[data-theme="dark"]{--panel:#fff;--ink:#16181d;--muted:#5d6472;--line:#e4e6ea;--chip:#f1f2f5;--kbd:#fff;--kbd-edge:#c9cdd4;--shadow:none;--title:linear-gradient(90deg,#c1121f,#f77f00 55%,#e0a100)}
+*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+html,body{background:#fff!important}
+body{font-size:10pt;line-height:1.4}
+body::after,.tools,nav.tabs,.quote,footer,section.tool::before{display:none!important}
+.wrap{max-width:none;padding:0}
+header.top{margin:0 0 6mm;padding:0 0 4mm;border:0;border-bottom:2px solid #f77f00;border-radius:0;box-shadow:none;background:none;backdrop-filter:none}
+h1{font-size:20pt}
+.print-only{display:block}
+section.tool{margin:0;border-radius:10px;box-shadow:none;backdrop-filter:none;overflow:visible;break-inside:auto}
+section.tool+section.tool{break-before:page}
+section.tool>header{break-after:avoid}
+.cat{break-inside:avoid-page}
+.cat h3{break-after:avoid}
+.row{break-inside:avoid;padding:5px 0}
+kbd{padding:4px 6px;font-size:9pt}
+code{font-size:9pt}
+.print-foot{margin-top:6mm;font-size:8pt;color:#5d6472;text-align:center;font-style:italic}
+}
 </style></head><body><div class="wrap">
-<header class="top"><div><h1>Devflow Commands</h1><p class="sub"><a href="index.html">← All cheat sheets</a></p></div>
-<div class="tools"><input id="q" type="search" placeholder="Filter…  ( / )" aria-label="Filter"><button class="theme" type="button" aria-label="Toggle theme">◐</button></div></header>
+<header class="top"><div class="brand"><svg class="hat" viewBox="0 0 64 40" aria-hidden="true"><ellipse cx="32" cy="30" rx="30" ry="8.5" fill="#f4c542" stroke="#9a6a00" stroke-width="1.2"/><path d="M14 29C14 6 50 6 50 29Z" fill="#f8d76a" stroke="#9a6a00" stroke-width="1.2"/><path d="M14.4 23.5C21 20.5 43 20.5 49.6 23.5L50 29C43 25.8 21 25.8 14 29Z" fill="#d62828"/></svg><div><h1>Devflow Commands</h1><p class="sub"><a href="index.html">← All cheat sheets</a></p><p class="quote">“I’m gonna be King of the Pirates!” — Monkey D. Luffy</p></div></div>
+<div class="tools"><input id="q" type="search" placeholder="Log Pose… filter  ( / )" aria-label="Filter"><button class="print" type="button" aria-label="Print (A4)" title="Print / Save as PDF (A4)">🖨 Print</button><button class="theme" type="button" aria-label="Toggle theme">◐</button></div></header>
 <nav class="tabs"><a href="command-bmad.html" style="--accent:#8b5cf6"><span class="dot"></span>Bmad · Commands<span class="n">63</span></a><a href="command-claude.html" style="--accent:#d97757"><span class="dot"></span>Claude · Commands<span class="n">78</span></a><a href="command-devflow.html" style="--accent:#10b981"><span class="dot"></span>Devflow · Commands<span class="n">9</span></a><a href="command-githubcopilot.html" style="--accent:#2f81f7"><span class="dot"></span>GithubCopilot · Commands<span class="n">39</span></a><a href="command-vscode.html" style="--accent:#0ea5e9"><span class="dot"></span>VsCode · Commands<span class="n">26</span></a><a href="shortcut-claudecode.html" style="--accent:#d97757"><span class="dot"></span>ClaudeCode · Shortcuts<span class="n">19</span></a><a href="shortcut-githubcopilot.html" style="--accent:#2f81f7"><span class="dot"></span>GithubCopilot · Shortcuts<span class="n">11</span></a><a href="shortcut-vscode.html" style="--accent:#0ea5e9"><span class="dot"></span>VsCode · Shortcuts<span class="n">50</span></a><a href="tips-tokencost.html" style="--accent:#eab308"><span class="dot"></span>TokenCost · Tips<span class="n">16</span></a></nav>
 <section class="tool" id="command-devflow" style="--accent:#10b981">
 <header><div><div class="kind">Commands</div><h2>Devflow Commands</h2></div><span class="src">Command/Devflow/Devflow commands.md · 9 entries</span></header>
 <div class="cat"><h3>State management</h3><div class="grid"><div class="row"><div class="k"><code>devflow status</code></div><div class="d">Voir l'état courant du backlog (tous les items). Ex : <code>devflow status</code></div></div><div class="row"><div class="k"><code>devflow status ITEM</code></div><div class="d">Voir l'état d'une story ou epic spécifique. Ex : <code>devflow status 8-3</code></div></div><div class="row"><div class="k"><code>devflow checklist ITEM --to ÉTAT</code></div><div class="d">Afficher la checklist de la porte avant transition. Ex : <code>devflow checklist 8-3 --to IN_PROGRESS</code></div></div><div class="row"><div class="k"><code>devflow advance ITEM --to ÉTAT --checklist-ok --approve &quot;QUI (RAISON)&quot;</code></div><div class="d">Franchir la porte, valider jugement, enregistrer approbation, avancer état. Ex : <code>devflow advance 8-3 --to IN_PROGRESS --checklist-ok --approve &quot;JB (dev terminé)&quot;</code></div></div><div class="row"><div class="k"><code>devflow advance ITEM --to ÉTAT --mockup-version N</code></div><div class="d">Rouvrir une porte DoR fermée avec une nouvelle maquette (story UI). Ex : <code>devflow advance 8-1 --to READY --mockup-version 2</code></div></div></div></div><div class="cat"><h3>Jira sync</h3><div class="grid"><div class="row"><div class="k"><code>devflow sync-plan ITEM</code></div><div class="d">Planifier synchro Jira : action, champs, statut cible. Ex : <code>devflow sync-plan 8-3</code></div></div><div class="row"><div class="k"><code>devflow sync-match ITEM</code></div><div class="d">Chercher un doublon Jira avant création (lire JSON de sync-plan sur stdin). Ex : <code>devflow sync-plan 8-3 | devflow sync-match 8-3</code></div></div><div class="row"><div class="k"><code>devflow sync-transition &quot;&lt;STATUS&gt;&quot;</code></div><div class="d">Résoudre la transition Jira légale (lire résultat de getTransitionsForJiraIssue sur stdin). Ex : <code>jira-api get-transitions LUFFY-42 | devflow sync-transition &quot;In Progress&quot;</code></div></div><div class="row"><div class="k"><code>devflow sync-record ITEM --key &lt;CLÉ&gt; --status &quot;&lt;STATUT&gt;&quot;</code></div><div class="d">Enregistrer la clé Jira + rattachement story → epic. Ex : <code>devflow sync-record 8-3 --key LUFFY-42 --status &quot;In Progress&quot;</code></div></div></div></div><div style="height:12px"></div></section>
-<footer>Generated from the Markdown tables by <code>.claude/skills/tips-visuals/build.mjs</code> — edit the .md files, not this page.</footer>
+<p class="print-only print-foot">Tips &amp; Tricks · Straw Hat edition · “I’m gonna be King of the Pirates!”</p>
+<footer>☠ Set sail on the Grand Line · Generated from the Markdown tables by <code>.claude/skills/tips-visuals/build.mjs</code> — edit the .md files, not this page.</footer>
 </div><script>
 const q=document.getElementById('q');
 q&&q.addEventListener('input',()=>{const t=q.value.trim().toLowerCase();
@@ -60,4 +94,6 @@ if(th)document.documentElement.dataset.theme=th;
 b&&b.addEventListener('click',()=>{const dark=document.documentElement.dataset.theme?document.documentElement.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
 const n=dark?'light':'dark';document.documentElement.dataset.theme=n;try{localStorage.setItem('tt-theme',n)}catch(e){}});
 document.addEventListener('keydown',e=>{if(e.key==='/'&&document.activeElement!==q){e.preventDefault();q&&q.focus()}});
+const p=document.querySelector('button.print');p&&p.addEventListener('click',()=>window.print());
+const Q=["I’m gonna be King of the Pirates! — Monkey D. Luffy","If you don’t take risks, you can’t create a future! — Monkey D. Luffy","The one with the most freedom on the whole sea is the Pirate King! — Monkey D. Luffy","Gomu Gomu no… shortcut! — the Straw Hat crew, probably"],qe=document.querySelector('.quote');qe&&(qe.textContent='“'+Q[Math.floor(Math.random()*Q.length)].replace(' — ','” — '));
 </script></body></html>
