@@ -30,3 +30,10 @@ Steps:
 6. Don't ask for confirmation for this action — just do it and tell the user in one line what was added/updated and where.
 
 Only touch this pattern when the user is clearly giving/asking about a command for a tool. For anything else in this folder, use normal judgment.
+
+## HTML visuals (keep in sync)
+
+`Visuals/*.html` is generated from the Markdown tables by the `tips-visuals` skill (`.claude/skills/tips-visuals/`). Never edit the HTML by hand.
+
+- After any change to a file under `Command/` or `Shortcut/`, regenerate: `node .claude/skills/tips-visuals/build.mjs`. A PostToolUse hook in `.claude/settings.json` does this automatically when this folder is the Claude Code project root; when working from another root (e.g. the BMAD-SETUP workspace), run it yourself.
+- When creating a new tool folder, add an accent color for it in `ACCENTS` in `build.mjs`.

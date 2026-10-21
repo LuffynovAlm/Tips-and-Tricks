@@ -1,53 +1,79 @@
-# Tips and Tricks
+# ⚡ Tips & Tricks
 
-Personal reference notes, organized by tool/topic.
+> Commands and keyboard shortcuts for **BMad**, **Claude Code**, **GitHub Copilot** and **VS Code**, kept as Markdown tables and published as searchable cheat sheets.
 
-## Shortcut/
+### 👉 [**Open the cheat sheets**](https://luffynovalm.github.io/Tips-and-Tricks/Visuals/)
 
-Each subfolder under `Shortcut/` is named after a tool (e.g. `ClaudeCode`, `vsCode`) and contains a single file:
+Filter with <kbd>/</kbd>, switch light/dark with ◐, and use one page per tool or the [all-in-one view](https://luffynovalm.github.io/Tips-and-Tricks/Visuals/).
 
-```
-Shortcut/
-  <ToolName>/
-    <ToolName> shortcuts.md
-```
+---
 
-Each `shortcuts.md` file holds a Markdown table of keyboard shortcuts for that tool:
+## 📚 What's inside
 
-| Shortcut | Action |
-|---|---|
-| ... | ... |
+| Tool | Commands | Shortcuts |
+|---|---|---|
+| 🟣 **BMad** | [Bmad commands](Command/Bmad/Bmad%20commands.md): skills by phase, with menu codes | — |
+| 🟠 **Claude Code** | [Claude commands](Command/Claude/Claude%20commands.md): slash commands, input prefixes, CLI flags | [ClaudeCode shortcuts](Shortcut/ClaudeCode/ClaudeCode%20shortcuts.md) |
+| 🔵 **GitHub Copilot** | [GithubCopilot commands](Command/GithubCopilot/GithubCopilot%20commands.md): `/` commands, `@` participants, `#` variables, CLI | [GithubCopilot shortcuts](Shortcut/GithubCopilot/GithubCopilot%20shortcuts.md) |
+| 🩵 **VS Code** | [VsCode commands](Command/VsCode/VsCode%20commands.md): `code` CLI, Command Palette, Quick Open prefixes | [vsCode shortcuts](Shortcut/VsCode/vsCode%20shortcuts.md) |
+| 🟢 **Devflow** | [Devflow commands](Command/Devflow/Devflow%20commands.md): state gates and Jira sync | — |
 
-### Adding a new shortcut
-
-- If the tool's folder doesn't exist yet under `Shortcut/`, create it.
-- If the tool's `<ToolName> shortcuts.md` file doesn't exist yet, create it with a `# <ToolName> Shortcuts` heading and an empty table.
-- Add the new shortcut as a row in that table.
-
-## Command/
-
-Each subfolder under `Command/` is named after a tool (e.g. `Claude`) and contains a single file:
+## 🗂️ Structure
 
 ```
-Command/
-  <ToolName>/
-    <ToolName> commands.md
+Command/<Tool>/<Tool> commands.md     ← typed commands, one "## Category" + table per group
+Shortcut/<Tool>/<Tool> shortcuts.md   ← keyboard shortcuts, one table
+Visuals/                              ← generated HTML (do not edit by hand)
+.claude/skills/tips-visuals/          ← the generator skill
 ```
 
-Each `commands.md` file holds typed commands (slash commands, CLI commands/flags — as opposed to keyboard `Shortcut/` entries), grouped into category sections with a Markdown table per category:
+**Command tables** have the columns `Command | Description` and are grouped under `## <Category>` headings.
+**Shortcut tables** have the columns `Shortcut | Action`.
+
+To add an entry, add a row to the right table, creating the folder or file if needed. Or just tell Claude *"remember this shortcut: …"*. [CLAUDE.md](CLAUDE.md) tells it where to put the entry.
+
+---
+
+## 🎨 The `tips-visuals` skill
+
+The Markdown tables are the **single source of truth**. The `tips-visuals` skill turns them into a set of styled HTML pages.
 
 ```
-## <Category>
-
-| Command | Description |
-|---|---|
-| ... | ... |
+ Command/*.md ─┐
+               ├──▶  build.mjs  ──▶  Visuals/index.html          (everything, one page)
+Shortcut/*.md ─┘                     Visuals/<kind>-<tool>.html  (one page per sheet)
 ```
 
-### Adding a new command
+### What it renders
 
-- If the tool's folder doesn't exist yet under `Command/`, create it.
-- If the tool's `<ToolName> commands.md` file doesn't exist yet, create it with a `# <ToolName> Commands` heading.
-- Add the new command as a row under the right category section (create a new category section if none fits).
+- ⌨️ **Shortcuts as keycaps.** `Ctrl+Shift+P` becomes <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>. A `, ` reads as *"then"* (`Esc, Esc`) and ` / ` reads as *"or"* (`Alt+] / Alt+[`).
+- 💻 **Commands as code chips.** A description starting with a BMad menu code such as `[PRD]` gets a colored badge.
+- 🔍 **Instant filter** across every sheet. Press <kbd>/</kbd> to focus it.
+- 🌗 **Light and dark themes** that follow your OS, with a manual toggle.
+- 🎯 **One accent color per tool.** New tool folders show up automatically.
 
-See [CLAUDE.md](CLAUDE.md) for the instructions Claude follows to do this automatically when asked.
+### How to run it
+
+```bash
+node .claude/skills/tips-visuals/build.mjs
+```
+
+You can also ask Claude Code to *"sync the visuals"*. Every run wipes `Visuals/` and rebuilds it, so a row you delete from a table also disappears from the pages.
+
+### Staying in sync automatically
+
+[.claude/settings.json](.claude/settings.json) has a **PostToolUse hook**. When Claude Code runs with this folder as its project root, any edit to a file under `Command/` or `Shortcut/` rebuilds the visuals right away. Edits to other files are ignored.
+
+If you edit outside Claude Code, or from another root folder, run the command above before committing.
+
+### Adding a new tool
+
+1. Create `Command/<Tool>/<Tool> commands.md` or `Shortcut/<Tool>/<Tool> shortcuts.md`.
+2. Optionally give the tool a color in `ACCENTS` in [build.mjs](.claude/skills/tips-visuals/build.mjs). Without one it's shown in gray.
+3. Rebuild. The tool shows up in the nav and gets its own page.
+
+---
+
+## 🌐 Publishing
+
+The site is served by **GitHub Pages** from the `main` branch root. The root [index.html](index.html) redirects to `Visuals/`, and `.nojekyll` turns off Jekyll processing. Push to `main` and the site updates within about a minute.

@@ -18,6 +18,12 @@ Built-in Claude Code slash commands (typed inside a session) and CLI commands/fl
 | `/config` | Toggle/configure settings, e.g. continuous context-window metrics on the status line |
 | `/model` | Switch or configure the model for this session, optionally saved as default |
 | `/effort` | Set reasoning effort level (low, medium, high, xhigh, max) |
+| `/agents` | Create and manage custom subagents |
+| `/hooks` | Configure hooks that run on tool events |
+| `/statusline` | Set up a custom status line |
+| `/terminal-setup` | Install Shift+Enter for newlines in your terminal |
+| `/vim` | Toggle vim editing mode in the prompt |
+| `/keybindings` | Customize keyboard shortcuts |
 
 ## Context & Memory
 
@@ -35,6 +41,18 @@ Built-in Claude Code slash commands (typed inside a session) and CLI commands/fl
 | `/cd` | Move the current session to a different working directory |
 | `/add-dir` | Add an additional working directory for file access |
 | `/exit` (alias `/quit`) | Exit the current Claude Code session |
+| `/rewind` | Roll back the conversation and/or code to an earlier point |
+| `/export` | Export the current conversation to a file or the clipboard |
+| `/status` | Show version, model, account and connectivity status |
+| `/artifacts` | List your artifacts (o opens one, c copies its link) |
+
+## Input Prefixes
+
+| Command | Description |
+|---|---|
+| `@path/to/file` | Mention a file or folder to pull it into context |
+| `!command` | Bash mode — run a shell command directly, output is added to context |
+| `/skill-name args` | Invoke a skill (e.g. `/bmad-help what next?`) |
 
 ## Permissions & Security
 
@@ -51,12 +69,17 @@ Built-in Claude Code slash commands (typed inside a session) and CLI commands/fl
 | `/code-review` (alias `/review`) | Review the current diff for bugs and cleanup suggestions |
 | `/security-review` | Check the current diff for security vulnerabilities |
 | `/verify` | Run verification checks on code changes |
+| `/code-review ultra` | Multi-agent cloud review of the current branch (or `/code-review ultra <PR#>`) |
+| `/simplify` | Review changed code for reuse/simplification and apply the fixes |
 
 ## MCP & Integrations
 
 | Command | Description |
 |---|---|
 | `/mcp` | Manage MCP server connections and check their status |
+| `/ide` | Connect to / manage the IDE integration |
+| `/install-github-app` | Set up the Claude GitHub app for PR/issue automation |
+| `/plugin` | Browse and install plugins from marketplaces |
 
 ## Automation
 
@@ -65,6 +88,8 @@ Built-in Claude Code slash commands (typed inside a session) and CLI commands/fl
 | `/loop` | Run a prompt repeatedly on a fixed or self-paced interval |
 | `/goal` | Set a completion condition for Claude to work toward autonomously |
 | `/fast` | Toggle Fast mode (Opus with faster output) — Opus 5/4.8 only |
+| `/schedule` | Create scheduled cloud agents (cron routines) |
+| `/fewer-permission-prompts` | Scan transcripts and allowlist common read-only commands |
 
 ## Project Setup & Meta
 
@@ -72,6 +97,8 @@ Built-in Claude Code slash commands (typed inside a session) and CLI commands/fl
 |---|---|
 | `/init` | Initialize a project with a CLAUDE.md guide |
 | `/help` | Show available commands and usage help |
+| `/doctor` | Check the health of your Claude Code installation |
+| `/release-notes` | Show the release notes |
 
 ## CLI Commands & Flags (run in the shell, not inside a session)
 
@@ -80,6 +107,8 @@ Built-in Claude Code slash commands (typed inside a session) and CLI commands/fl
 | `claude` | Start an interactive Claude Code session |
 | `claude "query"` | Start a session with an initial prompt |
 | `claude -p "query"` | Run a one-off query, print the response, then exit |
+| `cat file \| claude -p "query"` | Pipe content into a one-off query |
+| `claude -p "query" --output-format json` | One-off query with JSON output (also `stream-json`) |
 | `claude -c` / `--continue` | Continue the most recent conversation in the current directory |
 | `claude -r <session>` / `--resume` | Resume a specific session by ID or name |
 | `claude --model <model>` | Start a session with a specific model |
