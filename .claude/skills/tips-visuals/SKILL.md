@@ -21,6 +21,7 @@ Output (all files are wiped and rebuilt on each run, so removed tables disappear
 ## Rendering rules (what the script expects from the Markdown)
 
 - `# Title` → sheet title; text before the first `##` → intro line
+- `# Title {v6.12.4}` / `## Category {v6.12.4}` → version tags (comma-separated allowed). A section tagged only `{v6}` is **legacy**: it is rendered but hidden until the page checkbox **Show v6 (legacy) tips** (unchecked by default, kept in `localStorage` as `tt-v6`) is ticked; counts show `N entries + M v6`; tagged sections get a version pill. Untagged sections are always visible. The checkbox only appears on pages that contain legacy content
 - `## Category` → a group; each table row → one entry (first column = key, second = description)
 - Shortcut files: the key column is turned into `<kbd>` chips. `+` joins keys in a chord, `, ` means "then" (sequence), ` / ` means "or" (alternatives)
 - Command files: inline `` `code` `` is rendered as code chips; a description starting with `[CODE]` (BMad menu code) becomes a colored tag

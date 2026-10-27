@@ -6,7 +6,7 @@ Keeping AI usage visible and cheap with Claude Code and GitHub Copilot. The matc
 
 | Tip | Why / How | Important |
 |---|---|---|
-| **Put the conversation's cost in the task's results and deliverables** | Before you close a task, run `/cost` (Claude Code) or `/usage` (Copilot CLI) and paste the numbers into the PR description, the story file (BMad *Dev Agent Record*), the commit body or the report. This shows the real cost of each feature and makes estimates better over time | ★ |
+| **Put the conversation's cost in the task's results and deliverables** | Before you close a task, run `/cost` (Claude Code) or `/usage` (Copilot CLI) and paste the numbers into the PR description, the BMad spec or story file (*Implementation Notes* in 6.12.4, *Dev Agent Record* in v6), the commit body or the report. This shows the real cost of each feature and makes estimates better over time | ★ |
 | Use one standard trace line | `AI usage: Claude Code · Opus 5.5 · effort high · 1.2M in / 85k out tokens · $4.20 · 2 sessions`. Use the same format everywhere so it's easy to grep and add up |  |
 | Record the model and effort with the cost | The same task can cost 5–10× more depending on the model. A cost figure without the model means little |  |
 | One task = one session | `/clear` between tasks so the cost you read belongs to exactly one deliverable. BMad already recommends a fresh context per workflow |  |

@@ -42,6 +42,10 @@ Structure: `Tips/<Topic>/<Topic> tips.md`, entries grouped into category section
 - After any change to a file under `Command/`, `Shortcut/` or `Tips/`, regenerate: `node .claude/skills/tips-visuals/build.mjs`. A PostToolUse hook in `.claude/settings.json` does this automatically when this folder is the Claude Code project root; when working from another root (e.g. the BMAD-SETUP workspace), run it yourself.
 - When creating a new tool folder, add an accent color for it in `ACCENTS` in `build.mjs`.
 
+## Versions (BMad)
+
+The BMad sheets track the installed BMad version (currently **6.12.4**, see `_bmad/_config/manifest.yaml` in the BMAD-SETUP workspace). Tag every `#` / `##` heading in `Command/Bmad/` and in BMad sections of `Tips/` with `{v6.12.4}` (current) or `{v6}` (legacy). Never delete the v6 sections when updating: re-tag them `{v6}`; the pages hide them behind the "Show v6 (legacy) tips" checkbox (unchecked by default). Skill renames are listed in the `v6-shims/README.md` files under `_bmad/bmm/` and `_bmad/core/`.
+
 ## The `Important` column
 
 Every table has a last column `Important`: `★` when the entry is one of the few you use all the time or must not forget, empty otherwise. Keep it sparse (roughly 1 row in 4 at most). When adding a row, decide whether it deserves `★`. In the HTML each row has a checkbox initialised from this column; the "★ Highlight" toggle shows ticked rows in neon green / violet / orange on a dark gradient.

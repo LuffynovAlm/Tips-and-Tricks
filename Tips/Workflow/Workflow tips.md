@@ -1,8 +1,25 @@
-# Workflow Tips
+# Workflow Tips {v6.12.4}
 
-The commands that give the most for the least: BMad story cycle, HVE `rpi-review`, and how to pick up an existing session in Claude Code or GitHub Copilot. Full syntax is in the Bmad, Hve, Claude and GithubCopilot command sheets.
+The commands that give the most for the least: BMad build cycle (**6.12.4**; the previous v6 story cycle is kept under {v6}, hidden by default), HVE `rpi-review`, and how to pick up an existing session in Claude Code or GitHub Copilot. Full syntax is in the Bmad, Hve, Claude and GithubCopilot command sheets.
 
-## BMad story cycle — help → create → dev → review
+## BMad build cycle — help → sprint plan → build → review {v6.12.4}
+
+| Tip | Why / How | Important |
+|---|---|---|
+| **Start with `/bmad-help` to set the context** | It reads your artifacts and sprint status, says where you are and which workflow is next. Ask it a real question: `/bmad-help what is the next story of epic 2 and what context does it need?` | ★ |
+| Install `uv` first | Every 6.12.4 workflow skill starts with a `uv run` render step and HALTS if `uv` is missing. `npx bmad-method install` needs it too |  |
+| Set up the repo's agent instructions once | `/bmad-project-context` (setup / adopt / refresh / record / audit) maintains a verified block in `AGENTS.md`. It replaces `generate-project-context`; use `record` when an agent repeats a mistake so it becomes a pitfall |  |
+| **`/bmad-sprint-planning` before the first build** | It runs a readiness gate (PASS / CONCERNS / FAIL) on PRD, UX, architecture and epics, then writes `sprint-status.yaml`. Run it again with intent `status` any time: `/bmad-sprint-planning show sprint status` | ★ |
+| **`/bmad-build` in a fresh context** | `/clear`, then `/bmad-build` with a story, an issue link, a spec file or just the intent. One flow: clarify → plan → implement → review → present. The spec file is the hand-off, not the chat | ★ |
+| Build resumes where it stopped | Rerun `/bmad-build`: it lists active specs (`draft`, `ready-for-dev`, `in-progress`, `in-review`) and lets you resume one instead of starting over |  |
+| Keep one spec = one user goal | Build aims at a single shippable goal in roughly 900–1600 tokens. Several independent deliverables → split them, or use `/bmad-spec` to break a spec into stories |  |
+| Add an independent review when it matters | Build already reviews. For a second look in a new session, ideally another model: `/bmad-code-review`, or `/bmad-review lenses=edge-case-hunter,verification-gap` on a diff or a document | ★ |
+| Walk through the change as a human | `/bmad-walkthrough` explains what the change is for, what to inspect closely and how to test it before you merge |  |
+| Many stories in a row | `/bmad-story-automator` chains create → dev → QA → review → retro across an epic; `bmad-loop` runs unattended and pauses on escalations for `/bmad-loop-resolve <story-key>` |  |
+| Old skill names still work | `bmad-quick-dev`, `bmad-create-prd`, `bmad-sprint-status`, `bmad-checkpoint-preview`, `bmad-market-research`… forward to the new skills (shims, removed with v7 only). Prefer the new names |  |
+| Log the AI cost in the deliverable | `/cost` before closing, then the `AI usage:` line in the spec's *Implementation Notes* (bmad-build) or the story's *Dev Agent Record* (v6), one line per session, a total at the end |  |
+
+## BMad story cycle — help → create → dev → review {v6}
 
 | Tip | Why / How | Important |
 |---|---|---|
@@ -29,7 +46,7 @@ The commands that give the most for the least: BMad story cycle, HVE `rpi-review
 | Challenge a decision | `/rpi-challenger subject=...` asks one skeptical question per turn, no answers given — good before an architecture choice |  |
 | Understand a change | `/rpi-walkthrough target=<files> detail=brief` explains segment by segment with file links |  |
 | Copilot equivalent | `/task-research`, `/task-plan`, `/task-implement phaseStop=true`, `/task-review scope=today`, or `/rpi task=...` for the autonomous RPI Agent |  |
-| BMad or RPI? | BMad story → `/bmad-code-review`. RPI-tracked task (plan + changes in `.copilot-tracking/`) → `/rpi-review`. Each review expects its own artifacts |  |
+| BMad or RPI? | BMad spec / story → `/bmad-code-review`. RPI-tracked task (plan + changes in `.copilot-tracking/`) → `/rpi-review`. Each review expects its own artifacts |  |
 
 ## Join an existing session — Claude Code
 
@@ -40,7 +57,7 @@ The commands that give the most for the least: BMad story cycle, HVE `rpi-review
 | `/resume` | Same picker from inside a running session |  |
 | `claude -r <id> --fork-session` | Resume into a new session ID: you branch off without changing the original conversation |  |
 | Resume in the right folder | Sessions are stored per project directory: `cd` into the project first, or `-c` finds nothing |  |
-| Resume the work, not the chat | For BMad / RPI, a fresh `/clear` session + the artifact (story file, plan, `/rpi continue`) is often cheaper than resuming a long conversation |  |
+| Resume the work, not the chat | For BMad / RPI, a fresh `/clear` session + the artifact (spec / story file, plan, `/rpi continue`) is often cheaper than resuming a long conversation |  |
 
 ## Join an existing session — GitHub Copilot
 
@@ -51,4 +68,10 @@ The commands that give the most for the least: BMad story cycle, HVE `rpi-review
 | **`/checkpoint` (HVE)** | `/checkpoint mode=save description=story-2-3` before leaving, then `/checkpoint mode=continue description=story-2-3` in a new chat to restore the context | ★ |
 | `/rpi continue=1` (HVE) | The RPI Agent picks up suggested work item 1 from its last Discover phase |  |
 | **Compact** handoff button (HVE agents) | Compacts but keeps every `.copilot-tracking` path and the current phase — use it instead of a plain `/compact` | ★ |
+| BMad in Copilot | State lives in `sprint-status.yaml` and the spec / story file: in a new chat, `/bmad-help` or `/bmad-sprint-planning show sprint status` tells you where you left off |  |
+
+## BMad in Copilot {v6}
+
+| Tip | Why / How | Important |
+|---|---|---|
 | BMad in Copilot | State lives in `sprint-status.yaml` and the story file: in a new chat, `/bmad-help` or `/bmad-sprint-status` tells you where you left off |  |
