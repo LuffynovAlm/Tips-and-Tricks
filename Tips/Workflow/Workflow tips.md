@@ -1,6 +1,6 @@
 # Workflow Tips {v6.12.4}
 
-The commands that give the most for the least: BMad build cycle (**6.12.4**; the previous v6 story cycle is kept under {v6}, hidden by default), HVE `rpi-review`, and how to pick up an existing session in Claude Code or GitHub Copilot. Full syntax is in the Bmad, Hve, Claude and GithubCopilot command sheets.
+The commands that give the most for the least: BMad build cycle (**6.12.4**; the previous v6 story cycle is kept under {v6}, hidden by default), the BMad loop for unattended runs, HVE `rpi-review`, and how to pick up an existing session in Claude Code or GitHub Copilot. Full syntax is in the Bmad, Hve, Claude and GithubCopilot command sheets.
 
 ## BMad build cycle — help → sprint plan → build → review {v6.12.4}
 
@@ -18,6 +18,23 @@ The commands that give the most for the least: BMad build cycle (**6.12.4**; the
 | Many stories in a row | `/bmad-story-automator` chains create → dev → QA → review → retro across an epic; `bmad-loop` runs unattended and pauses on escalations for `/bmad-loop-resolve <story-key>` |  |
 | Old skill names still work | `bmad-quick-dev`, `bmad-create-prd`, `bmad-sprint-status`, `bmad-checkpoint-preview`, `bmad-market-research`… forward to the new skills (shims, removed with v7 only). Prefer the new names |  |
 | Log the AI cost in the deliverable | `/cost` before closing, then the `AI usage:` line in the spec's *Implementation Notes* (bmad-build) or the story's *Dev Agent Record* (v6), one line per session, a total at the end |  |
+
+## BMad loop — unattended build with `bmad-loop` {v6.12.4}
+
+`bmad-loop` is an orchestrator, not a skill. It spawns a fresh coding CLI session per step (dev with `bmad-build-auto`, then a review pass), watches their hook signals and checks their artifacts. Use it for a queue of well-specified stories; keep `/bmad-build` for work that needs your judgment.
+
+| Tip | Why / How | Important |
+|---|---|---|
+| **Install once, then init the project** | `/bmad-loop-setup` installs the tool from Git (`uv tool install "bmad-loop[tui] @ git+https://github.com/bmad-code-org/bmad-loop.git"`), then `bmad-loop init --project "<project root>" --cli claude` registers the hooks and writes `.bmad-loop/policy.toml` | ★ |
+| Check before the first run | `bmad-loop validate --project "<project root>"` preflights the install and the per-role adapter config. Fix what it reports before you start a run |  |
+| Accept the first-run dialogs by hand | Start `claude` once in the project and accept the workspace-trust and hooks-approval prompts. Spawned sessions cannot answer them, and the run stalls there |  |
+| One CLI or several | `init --cli claude --cli codex` sets up more than one profile. Valid names: `claude`, `codex`, `gemini`, `copilot`, `antigravity` |  |
+| Watch it live | `bmad-loop tui` opens the Textual dashboard (installed with the `[tui]` extra) to follow the run, the story and the sessions |  |
+| **Escalation = a question for you** | A run pauses on a CRITICAL escalation: a contradiction or gap in the frozen spec that a session could not resolve safely. Resolve it in an interactive session with `/bmad-loop-resolve <story-key>`. The human makes the call; the spec is then updated and the story re-driven | ★ |
+| Environment fault | If the run paused on an environment problem rather than a spec problem, fix the environment, then `bmad-loop resume <run>`. Do not edit the spec for it |  |
+| Triage the deferred work | `bmad-loop sweep` verifies each open entry in the deferred-work ledger against the code and sorts it into bundles, already resolved, blocked, skip or human decision. It is read-only |  |
+| Keep the stories small | An unattended session cannot ask questions. Give the loop stories with clear acceptance criteria and one goal each; a vague story is the most common reason for an escalation |  |
+| Track the cost per session | Every loop session is its own Claude session. Use `/cost` on the sessions you care about and log one `AI usage:` line per session in the spec, as with `/bmad-build` |  |
 
 ## BMad story cycle — help → create → dev → review {v6}
 
