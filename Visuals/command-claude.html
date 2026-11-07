@@ -1,8 +1,8 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Claude Commands</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet"><style>
-:root{--panel:rgba(255,255,255,.56);--card:rgba(255,255,255,.72);--ink:#16181d;--muted:#4a5160;--line:rgba(20,30,50,.11);--chip:rgba(20,30,50,.06);--kbd:linear-gradient(#fff,#f2f3f6);--kbd-edge:#c3c8d0;--shadow:0 1px 2px rgba(16,24,40,.08),0 16px 40px -12px rgba(16,24,40,.35);--title:linear-gradient(90deg,#c1121f,#f77f00 55%,#e0a100);--sky1:#2c3d7e;--sky2:#8a64ad;--sky3:#f2907e;--sky4:#ffd590;--sea1:#f3a874;--sea2:#4f84bd;--sea3:#10386a;--sun1:#fffbea;--sun2:#ffc23d;--glow:rgba(255,214,120,.7);--bird:rgba(60,40,80,.55)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--panel:rgba(16,20,30,.52);--card:rgba(22,26,36,.70);--ink:#e8eaee;--muted:#a3abba;--line:rgba(255,255,255,.10);--chip:rgba(255,255,255,.08);--kbd:linear-gradient(#2a303c,#222732);--kbd-edge:#3e4553;--shadow:0 1px 2px rgba(0,0,0,.5),0 16px 40px -12px rgba(0,0,0,.7);--title:linear-gradient(90deg,#ff5d5d,#ffb347 55%,#ffd86b);--sky1:#060a1c;--sky2:#1a1d48;--sky3:#4d2c5c;--sky4:#b8607a;--sea1:#8c4f6c;--sea2:#1c2c58;--sea3:#050b1e;--sun1:#ffe9c4;--sun2:#ff8a4c;--glow:rgba(255,140,90,.45);--bird:rgba(255,255,255,.35)}}
-:root[data-theme="dark"]{--panel:rgba(16,20,30,.52);--card:rgba(22,26,36,.70);--ink:#e8eaee;--muted:#a3abba;--line:rgba(255,255,255,.10);--chip:rgba(255,255,255,.08);--kbd:linear-gradient(#2a303c,#222732);--kbd-edge:#3e4553;--shadow:0 1px 2px rgba(0,0,0,.5),0 16px 40px -12px rgba(0,0,0,.7);--title:linear-gradient(90deg,#ff5d5d,#ffb347 55%,#ffd86b);--sky1:#060a1c;--sky2:#1a1d48;--sky3:#4d2c5c;--sky4:#b8607a;--sea1:#8c4f6c;--sea2:#1c2c58;--sea3:#050b1e;--sun1:#ffe9c4;--sun2:#ff8a4c;--glow:rgba(255,140,90,.45);--bird:rgba(255,255,255,.35)}
+:root{--accent-text:var(--accent);--panel:rgba(255,255,255,.56);--card:rgba(255,255,255,.72);--ink:#16181d;--muted:#4a5160;--line:rgba(20,30,50,.11);--chip:rgba(20,30,50,.06);--kbd:linear-gradient(#fff,#f2f3f6);--kbd-edge:#c3c8d0;--shadow:0 1px 2px rgba(16,24,40,.08),0 16px 40px -12px rgba(16,24,40,.35);--title:linear-gradient(90deg,#c1121f,#f77f00 55%,#e0a100);--sky1:#2c3d7e;--sky2:#8a64ad;--sky3:#f2907e;--sky4:#ffd590;--sea1:#f3a874;--sea2:#4f84bd;--sea3:#10386a;--sun1:#fffbea;--sun2:#ffc23d;--glow:rgba(255,214,120,.7);--bird:rgba(60,40,80,.55)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--accent-text:color-mix(in srgb,var(--accent) 52%,#fff);--panel:rgba(16,20,30,.52);--card:rgba(22,26,36,.70);--ink:#e8eaee;--muted:#a3abba;--line:rgba(255,255,255,.10);--chip:rgba(255,255,255,.08);--kbd:linear-gradient(#2a303c,#222732);--kbd-edge:#3e4553;--shadow:0 1px 2px rgba(0,0,0,.5),0 16px 40px -12px rgba(0,0,0,.7);--title:linear-gradient(90deg,#ff5d5d,#ffb347 55%,#ffd86b);--sky1:#060a1c;--sky2:#1a1d48;--sky3:#4d2c5c;--sky4:#b8607a;--sea1:#8c4f6c;--sea2:#1c2c58;--sea3:#050b1e;--sun1:#ffe9c4;--sun2:#ff8a4c;--glow:rgba(255,140,90,.45);--bird:rgba(255,255,255,.35)}}
+:root[data-theme="dark"]{--accent-text:color-mix(in srgb,var(--accent) 52%,#fff);--panel:rgba(16,20,30,.52);--card:rgba(22,26,36,.70);--ink:#e8eaee;--muted:#a3abba;--line:rgba(255,255,255,.10);--chip:rgba(255,255,255,.08);--kbd:linear-gradient(#2a303c,#222732);--kbd-edge:#3e4553;--shadow:0 1px 2px rgba(0,0,0,.5),0 16px 40px -12px rgba(0,0,0,.7);--title:linear-gradient(90deg,#ff5d5d,#ffb347 55%,#ffd86b);--sky1:#060a1c;--sky2:#1a1d48;--sky3:#4d2c5c;--sky4:#b8607a;--sea1:#8c4f6c;--sea2:#1c2c58;--sea3:#050b1e;--sun1:#ffe9c4;--sun2:#ff8a4c;--glow:rgba(255,140,90,.45);--bird:rgba(255,255,255,.35)}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%;background:#10386a}
 body{margin:0;min-height:100vh;background:transparent;color:var(--ink);font:15px/1.55 "Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
 .scene{position:fixed;inset:0;z-index:-1;pointer-events:none}
@@ -51,9 +51,9 @@ section.tool::before{content:"☠";position:absolute;right:22px;bottom:4px;font-
 section.tool>header{padding:18px 24px;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 18%,transparent),transparent 75%);box-shadow:inset 0 4px 0 var(--accent)}
 section.tool>header .hat{display:none}
 section.tool h2{margin:2px 0 0;font-size:23px;font-weight:800;letter-spacing:-.02em}
-.kind{font-size:11.5px;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);font-weight:700}
+.kind{font-size:11.5px;text-transform:uppercase;letter-spacing:.12em;color:var(--accent-text);font-weight:700}
 .meta{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
-.count{font-size:12.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent)}
+.count{font-size:12.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent-text)}
 .src{font-size:11.5px;color:var(--muted)}
 .intro{margin:16px 24px 0;padding:10px 14px;border-left:3px solid var(--accent);background:color-mix(in srgb,var(--accent) 6%,transparent);border-radius:0 8px 8px 0;color:var(--muted);font-size:14px;max-width:90ch}
 .cats{padding:18px 20px 6px;columns:2 440px;column-gap:16px}
@@ -74,7 +74,7 @@ section.tool h2{margin:2px 0 0;font-size:23px;font-weight:800;letter-spacing:-.0
 .row .d{color:var(--ink);min-width:0;overflow-wrap:anywhere;font-size:14px}
 .row .d code{font-size:12px}
 code{font-family:"JetBrains Mono",ui-monospace,"Cascadia Code",Consolas,monospace;background:var(--chip);padding:2px 6px;border-radius:6px;font-size:12.5px}
-.kv>code:first-child{color:var(--accent);font-weight:600;background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.kv>code:first-child{color:var(--accent-text);font-weight:600;background:color-mix(in srgb,var(--accent) 10%,transparent)}
 kbd{display:inline-block;min-width:26px;text-align:center;font:600 12px/1 "JetBrains Mono",ui-monospace,"Cascadia Code",Consolas,monospace;padding:6px 8px;border-radius:7px;background:var(--kbd);border:1px solid var(--kbd-edge);box-shadow:inset 0 -2px 0 var(--kbd-edge),0 1px 1px rgba(0,0,0,.06);color:var(--ink)}
 .plus,.then,.or{color:var(--muted);font-size:11.5px;margin:0 3px}
 .then,.or{font-style:italic}
@@ -84,7 +84,7 @@ kbd{display:inline-block;min-width:26px;text-align:center;font:600 12px/1 "JetBr
 .vhide{display:none!important}
 select.ver-sel{height:38px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:0 10px;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
 select.ver-sel:hover,select.ver-sel:focus{border-color:#f77f00;outline:none}
-.ver{display:inline-block;margin-left:6px;padding:2px 6px;border-radius:999px;font:600 10px/1 "JetBrains Mono",ui-monospace,Consolas,monospace;letter-spacing:0;text-transform:none;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent);vertical-align:1px}
+.ver{display:inline-block;margin-left:6px;padding:2px 6px;border-radius:999px;font:600 10px/1 "JetBrains Mono",ui-monospace,Consolas,monospace;letter-spacing:0;text-transform:none;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent-text);vertical-align:1px}
 .empty{color:var(--muted);padding:12px 0;font-style:italic}
 footer{color:rgba(255,255,255,.85);font-size:12px;text-align:center;margin-top:32px;text-shadow:0 1px 2px rgba(0,0,0,.4)}
 footer code{background:rgba(0,0,0,.25);color:#fff}
@@ -108,7 +108,7 @@ body.only-imp .kind::after{content:" · ★ selection"}
 /* Print: A4, ink-friendly light theme, two columns per sheet, one cheat sheet per page, categories and rows never cut in half */
 @page{size:A4;margin:11mm 10mm 13mm;@bottom-left{content:"Tips & Tricks · Straw Hat edition";font:italic 7.5pt system-ui,sans-serif;color:#8a909c}@bottom-right{content:counter(page) " / " counter(pages);font:7.5pt system-ui,sans-serif;color:#8a909c}}
 @media print{
-:root:not(#_){--panel:#fff;--card:#fff;--ink:#16181d;--muted:#5d6472;--line:#e6e8ec;--chip:#f1f2f5;--kbd:#fff;--kbd-edge:#bfc4cc;--shadow:none;--title:linear-gradient(90deg,#c1121f,#f77f00 55%,#e0a100)}
+:root:not(#_){--accent-text:var(--accent);--panel:#fff;--card:#fff;--ink:#16181d;--muted:#5d6472;--line:#e6e8ec;--chip:#f1f2f5;--kbd:#fff;--kbd-edge:#bfc4cc;--shadow:none;--title:linear-gradient(90deg,#c1121f,#f77f00 55%,#e0a100)}
 *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 html,body{background:#fff!important}
 body{font-size:8.6pt;line-height:1.35}
