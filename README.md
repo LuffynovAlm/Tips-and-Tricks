@@ -12,7 +12,7 @@ Filter with <kbd>/</kbd>, switch light/dark with ◐, and use one page per tool 
 
 | Tool | Commands | Shortcuts |
 |---|---|---|
-| 🟣 **BMad** | [Bmad commands](Command/Bmad/Bmad%20commands.md): skills by phase, with menu codes — **BMad 6.12.4** (previous v6 skills kept as a hidden “legacy” layer) | — |
+| 🟣 **BMad** | One sheet per BMad version, chosen with the **version dropdown** (latest by default): [V7](Command/Bmad/Bmad-commands-V7.md) (preview alpha: `bmad`, Sofia, ticket tree, Toolsmith), [V6.12.4](Command/Bmad/Bmad-commands-V6.12.4.md) (stable, with menu codes), [V6](Command/Bmad/Bmad-commands-V6.md) (first v6 generation) | — |
 | 🟠 **Claude Code** | [Claude commands](Command/Claude/Claude%20commands.md): slash commands, input prefixes, CLI flags | [ClaudeCode shortcuts](Shortcut/ClaudeCode/ClaudeCode%20shortcuts.md) |
 | 🔵 **GitHub Copilot** | [GithubCopilot commands](Command/GithubCopilot/GithubCopilot%20commands.md): `/` commands, `@` participants, `#` variables, CLI | [GithubCopilot shortcuts](Shortcut/GithubCopilot/GithubCopilot%20shortcuts.md) |
 | 🩵 **VS Code** | [VsCode commands](Command/VsCode/VsCode%20commands.md): `code` CLI, Command Palette, Quick Open prefixes | [vsCode shortcuts](Shortcut/VsCode/vsCode%20shortcuts.md) |
@@ -24,21 +24,37 @@ Filter with <kbd>/</kbd>, switch light/dark with ◐, and use one page per tool 
 | Topic | |
 |---|---|
 | 🟡 **Token & Cost** | [TokenCost tips](Tips/TokenCost/TokenCost%20tips.md): **always put the AI cost of a conversation in the task's deliverables**, plus how to spend fewer tokens with Claude Code and Copilot |
-| 🟢 **Workflow** | [Workflow tips](Tips/Workflow/Workflow%20tips.md): the most effective commands — BMad 6.12.4 `bmad-help` → `bmad-sprint-planning` → `bmad-build` (v6: `bmad-create-story` → `bmad-dev-story`), `rpi-review`, and how to join an existing Claude Code / Copilot session |
+| 🟢 **Workflow** | [Workflow tips](Tips/Workflow/Workflow%20tips.md): the most effective commands — BMad v7 `bmad` → Sofia → `bmad-build`, 6.12.4 `bmad-help` → `bmad-sprint-planning` → `bmad-build` (v6: `bmad-create-story` → `bmad-dev-story`), `rpi-review`, and how to join an existing Claude Code / Copilot session |
 
-## 🏷️ Versions (BMad 6.12.4 and legacy v6)
+## 🏷️ Versions (BMad V7, V6.12.4, V6)
 
-The BMad sheets describe **6.12.4** (core/bmm 6.12.4, bmb v2.2.2, cis v0.3.2, tea v1.19.0, wds v0.4.3). The previous generation is kept in the same Markdown files and hidden on the pages by default.
+The pages have a **BMad version dropdown** in the toolbar. It opens on the **latest** version found, remembers your choice in the browser, and hides every row, sheet and nav chip that belongs to another version. Counts follow the selection. Content with no version (Claude, Copilot, VS Code, HVE, shortcuts…) shows for every version.
 
-- Tag a title or a `## Category` heading with `{v6.12.4}` (current) or `{v6}` (legacy), e.g. `## Phase 4 — Build & Ship {v6.12.4}`. Untagged sections are always shown.
-- A section tagged **only** `{v6}` is legacy: the pages hide it until the **Show v6 (legacy) tips** checkbox (unchecked by default, remembered in the browser) is ticked. Counts then read `N entries + M v6`.
-- Version pills appear next to the sheet title and each tagged category.
-- When BMad ships a new version, add a new tagged layer and re-tag the old one; most skill renames are listed in `_bmad/bmm/v6-shims/README.md` and `_bmad/core/v6-shims/README.md` of a BMad install.
+| BMad version | Files | State |
+|---|---|---|
+| **V7** (default) | `Command/Bmad/Bmad-commands-V7.md`, sections `{v7}` in Tips | preview alpha, release ETA mid-November 2026 |
+| **V6.12.4** | `Command/Bmad/Bmad-commands-V6.12.4.md`, sections `{v6.12.4}` | stable line (bug fixes only) |
+| **V6** | `Command/Bmad/Bmad-commands-V6.md`, sections `{v6}` | first v6 generation, kept for projects still on it |
+
+### How a version is declared
+
+- **A whole sheet = one file per version**, named `<Tool>-commands-V<version>.md` (also `-shortcuts-` / `-tips-`) in the tool's folder, e.g. `Command/Bmad/Bmad-commands-V7.md`. The suffix `-V7`, `-V6.12.4` sets the version of every row in the file; each file becomes its own page (`command-bmad-v7.html`). Put `{v7}` in the `#` title to show a version pill.
+- **Part of a sheet = a tag on the heading.** In a Tips file (or any file without a version suffix), tag a `## Category` with `{v7}`, `{v6.12.4}`, `{v6}` or several (`{v6.12.4, v7}`). A prerelease suffix is ignored for filtering: `{v7-alpha}` counts as `v7`. Untagged sections are always shown.
+- **The dropdown is built from what it finds**: every version in file names and tags, newest first (`V7`, `V6.12.4`, `V6`), the first being the default.
+
+### When BMad ships a new version
+
+1. Check the installed version (`bmad status` on v7, `_bmad/_config/manifest.yaml` on 6.x).
+2. Copy the latest sheet to `Bmad-commands-V<new>.md`, retitle it `# Bmad Commands {v<new>}` and fill it from the installed skills' own help (`bmad` skill, `help/help.md` of each module), never from memory. Do not touch the older files except to fix errors.
+3. For Tips with a version-specific workflow, add a `## … {v<new>}` section next to the old ones and extend the tags of sections that still apply (`{v6.12.4, v<new>}`).
+4. Add a *Retired or renamed* table to the new commands sheet (old name → new name). Skill renames are also in `_bmad/*/v6-shims/README.md` on 6.x installs and in the UpgradeBmad tips.
+5. Rebuild the visuals (`node .claude/skills/tips-visuals/build.mjs`); the new version becomes the default.
 
 ## 🗂️ Structure
 
 ```
 Command/<Tool>/<Tool> commands.md     ← typed commands, one "## Category" + table per group
+Command/Bmad/Bmad-commands-V<ver>.md  ← versioned tools: one file per version (see Versions)
 Shortcut/<Tool>/<Tool> shortcuts.md   ← keyboard shortcuts, one table
 Tips/<Topic>/<Topic> tips.md          ← best practices, "## Category" + Tip | Why / How table
 Visuals/                              ← generated HTML (do not edit by hand)
@@ -65,7 +81,7 @@ Shortcut/*.md ─┼──▶  build.mjs  ──▶  Visuals/index.html         
 ### What it renders
 
 - ⌨️ **Shortcuts as keycaps.** `Ctrl+Shift+P` becomes <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>. A `, ` reads as *"then"* (`Esc, Esc`) and ` / ` reads as *"or"* (`Alt+] / Alt+[`).
-- 🏷️ **Version layers.** `{v6.12.4}` / `{v6}` tags in headings; legacy sections are hidden unless **Show v6 (legacy) tips** is ticked.
+- 🏷️ **BMad versions.** A dropdown (latest by default) picks V7, V6.12.4 or V6 from the file-name suffix (`Bmad-commands-V7.md`) and `{v7}`-style heading tags; other versions are hidden and counts follow.
 - 💻 **Commands as code chips.** A description starting with a BMad menu code such as `[PRD]` gets a colored badge.
 - 🔍 **Instant filter** across every sheet. Press <kbd>/</kbd> to focus it.
 - 🌗 **Light and dark themes** that follow your OS, with a manual toggle.

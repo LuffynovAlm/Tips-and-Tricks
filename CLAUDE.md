@@ -18,7 +18,7 @@ Only touch this pattern when the user is clearly giving/asking about a shortcut 
 
 ## When the user gives you a command to remember
 
-Structure: `Command/<ToolName>/<ToolName> commands.md`, one folder per tool, entries grouped into category sections (`## <Category>`), one Markdown table per category (columns: `Command`, `Description`, `Important`).
+Structure: `Command/<ToolName>/<ToolName> commands.md` (versioned tools such as Bmad: `<ToolName>-commands-V<version>.md`, see Versions below), one folder per tool, entries grouped into category sections (`## <Category>`), one Markdown table per category (columns: `Command`, `Description`, `Important`).
 
 Steps:
 
@@ -44,7 +44,12 @@ Structure: `Tips/<Topic>/<Topic> tips.md`, entries grouped into category section
 
 ## Versions (BMad)
 
-The BMad sheets track the installed BMad version (currently **6.12.4**, see `_bmad/_config/manifest.yaml` in the BMAD-SETUP workspace). Tag every `#` / `##` heading in `Command/Bmad/` and in BMad sections of `Tips/` with `{v6.12.4}` (current) or `{v6}` (legacy). Never delete the v6 sections when updating: re-tag them `{v6}`; the pages hide them behind the "Show v6 (legacy) tips" checkbox (unchecked by default). Skill renames are listed in the `v6-shims/README.md` files under `_bmad/bmm/` and `_bmad/core/`.
+BMad exists in several versions at once and the pages have a **version dropdown** (latest by default; see README "Versions"). Latest = V7 (preview alpha, installed in the BMAD-SETUP-V7 workspace); stable = 6.12.4 (BMAD-SETUP workspace, `_bmad/_config/manifest.yaml`).
+
+- **Commands**: one file per version in `Command/Bmad/`: `Bmad-commands-V7.md`, `Bmad-commands-V6.12.4.md`, `Bmad-commands-V6.md`. The `-V<version>` suffix is what sets the version; add a command to the file of the version it belongs to (a command valid in several versions goes in each file). Title `# Bmad Commands {v<ver>}`, no per-section tags needed.
+- **Tips** (and any non-versioned file): tag `##` headings with `{v7}`, `{v6.12.4}`, `{v6}` or several (`{v6.12.4, v7}`). Untagged = shown for every version.
+- **New BMad version**: create `Bmad-commands-V<new>.md` (never edit older files except to fix errors), fill it from the installed skills' own help (the `bmad` skill, each module's `help/help.md`), never from memory, and add a "Retired or renamed" table. Other tools (Claude, Copilot…) are not versioned.
+- Skill renames: `v6-shims/README.md` under `_bmad/bmm/` and `_bmad/core/` (6.x), and the UpgradeBmad tips.
 
 ## The `Important` column
 

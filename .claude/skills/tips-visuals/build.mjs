@@ -12,7 +12,7 @@ const KINDS = [
   { dir: 'Shortcut', label: 'Shortcuts', kind: 'shortcut' },
   { dir: 'Tips', label: 'Tips', kind: 'tip' },
 ];
-const ACCENTS = { TokenCost: '#eab308',Bmad: '#8b5cf6', Claude: '#d97757', ClaudeCode: '#d97757', GithubCopilot: '#2f81f7', VsCode: '#0ea5e9', Devflow: '#10b981', Hve: '#e11d48', Workflow: '#84cc16' };
+const ACCENTS = { TokenCost: '#eab308',Bmad: '#8b5cf6', Claude: '#d97757', ClaudeCode: '#d97757', GithubCopilot: '#2f81f7', VsCode: '#0ea5e9', Devflow: '#10b981', Hve: '#e11d48', Workflow: '#84cc16', UpgradeBmad: '#f59e0b' };
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -47,13 +47,19 @@ function splitRow(line) {
   return cells;
 }
 
-// "## Phase 1 {v6.12.4}" -> tags ['v6.12.4']. A section tagged only "v6" is legacy: hidden until the page checkbox is ticked.
+// "
 function splitTags(text) {
-  const m = text.match(/\s*\{(v[\w.]+(?:\s*,\s*v[\w.]+)*)\}\s*$/);
+  const m = text.match(/\s*\{(v[\w.-]+(?:\s*,\s*v[\w.-]+)*)\}\s*$/);
   return m ? { text: text.slice(0, m.index).trim(), tags: m[1].split(',').map((x) => x.trim()) } : { text: text.trim(), tags: [] };
 }
-const isLegacy = (tags) => tags.length > 0 && tags.every((t) => t === 'v6');
-const tagLabel = (t) => (t === 'v6' ? 'v6 legacy' : t.replace(/^v/, ''));
+// Versions: "{v7-alpha}" and "{v7}" both select "v7"; "v6.12.4" stays as is. Tags label a pill; the dropdown filters on the normalised value.
+const normVer = (t) => t.toLowerCase().replace(/-.*$/, '');
+const tagLabel = (t) => t.replace(/^v/i, '');
+const verKey = (v) => v.replace(/^v/, '').split('.').map((n) => parseInt(n, 10) || 0);
+const verCmp = (a, b) => { const x = verKey(a), y = verKey(b); for (let i = 0; i < Math.max(x.length, y.length); i++) { const d = (y[i] || 0) - (x[i] || 0); if (d) return d; } return 0; };
+const verLabel = (v) => 'V' + v.replace(/^v/, '');
+// A file named "<Tool>-commands-V7.md" / "<Tool>-tips-V6.12.4.md" is one version of the sheet.
+const fileVersion = (f) => { const m = f.match(/-(v\d[\w.]*)\.md$/i); return m ? m[1].toLowerCase() : ''; };
 
 function parse(file) {
   const lines = fs.readFileSync(file, 'utf8').replace(/<!--[\s\S]*?-->/g, '').split(/\r?\n/);
@@ -62,12 +68,12 @@ function parse(file) {
   for (let i = 0; i < lines.length; i++) {
     const l = lines[i];
     if (/^#\s/.test(l)) { const t = splitTags(l.replace(/^#\s+/, '')); doc.title = t.text; doc.tags = t.tags; continue; }
-    if (/^##\s/.test(l)) { const t = splitTags(l.replace(/^##\s+/, '')); section = { name: t.text, tags: t.tags, legacy: isLegacy(t.tags), rows: [], notes: [] }; doc.sections.push(section); continue; }
+    if (/^##\s/.test(l)) { const t = splitTags(l.replace(/^##\s+/, '')); section = { name: t.text, tags: t.tags, rows: [], notes: [] }; doc.sections.push(section); continue; }
     if (/^\s*\|/.test(l)) {
       if (/^\s*\|[\s:|-]+\|\s*$/.test(l)) continue;
       const cells = splitRow(l);
       if (/^\s*\|[\s:|-]+\|\s*$/.test(lines[i + 1] || '')) continue; // header row
-      if (!section) { section = { name: '', tags: [], legacy: false, rows: [], notes: [] }; doc.sections.push(section); }
+      if (!section) { section = { name: '', tags: [], rows: [], notes: [] }; doc.sections.push(section); }
       section.rows.push(cells);
       continue;
     }
@@ -86,15 +92,18 @@ function collect() {
       if (!fs.statSync(dir).isDirectory()) continue;
       for (const f of fs.readdirSync(dir).filter((f) => f.endsWith('.md'))) {
         const doc = parse(path.join(dir, f));
-        const count = doc.sections.filter((s) => !s.legacy).reduce((n, s) => n + s.rows.length, 0);
-        const legacyCount = doc.sections.filter((s) => s.legacy).reduce((n, s) => n + s.rows.length, 0);
-        tools.push({ ...k, tool, doc, count, legacyCount, src: `${k.dir}/${tool}/${f}`, id: `${slug(k.dir)}-${slug(tool)}`,
+        const ver = fileVersion(f);
+        // Versions of a section: its own tags, else the file's version, else none (always shown).
+        for (const sec of doc.sections) sec.vers = sec.tags.length ? [...new Set(sec.tags.map(normVer))] : ver ? [ver] : [];
+        tools.push({ ...k, tool, doc, ver, src: `${k.dir}/${tool}/${f}`, id: `${slug(k.dir)}-${slug(tool)}${ver ? '-' + slug(ver) : ''}`,
           accent: ACCENTS[tool] || '#64748b' });
       }
     }
   }
   return tools;
 }
+// Entries of a sheet shown for version v ('' = no version selected: only untagged and file-less sections match nothing special).
+const countFor = (t, v) => t.doc.sections.filter((s) => !v || !s.vers.length || s.vers.includes(v)).reduce((n, s) => n + s.rows.length, 0);
 
 // Straw Hat (Luffy's hat) logo, inline so the pages stay single-file.
 const HAT = `<svg class="hat" viewBox="0 0 64 40" aria-hidden="true"><ellipse cx="32" cy="30" rx="30" ry="8.5" fill="#f4c542" stroke="#9a6a00" stroke-width="1.2"/><path d="M14 29C14 6 50 6 50 29Z" fill="#f8d76a" stroke="#9a6a00" stroke-width="1.2"/><path d="M14.4 23.5C21 20.5 43 20.5 49.6 23.5L50 29C43 25.8 21 25.8 14 29Z" fill="#d62828"/></svg>`;
@@ -234,12 +243,11 @@ kbd{display:inline-block;min-width:26px;text-align:center;font:600 12px/1 "JetBr
 .then,.or{font-style:italic}
 .tag{display:inline-block;font:700 10.5px/1 "JetBrains Mono",ui-monospace,Consolas,monospace;padding:4px 6px;border-radius:6px;background:var(--accent);color:#fff;margin-right:6px;vertical-align:1px}
 .hide{display:none!important}
-/* Versions: legacy (v6) sections and counts stay hidden until "Show v6 (legacy) tips" is ticked */
-body:not(.show-v6) .legacy,.legacy-n{display:none!important}
-body.show-v6 .legacy-n{display:inline!important}
+/* Versions: the dropdown hides rows, sheets and nav links that do not belong to the selected BMad version */
+.vhide{display:none!important}
+select.ver-sel{height:38px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:0 10px;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+select.ver-sel:hover,select.ver-sel:focus{border-color:#f77f00;outline:none}
 .ver{display:inline-block;margin-left:6px;padding:2px 6px;border-radius:999px;font:600 10px/1 "JetBrains Mono",ui-monospace,Consolas,monospace;letter-spacing:0;text-transform:none;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent);vertical-align:1px}
-.ver.old{background:rgba(247,127,0,.16);color:#c25e00}
-.cat.legacy{border-style:dashed}
 .empty{color:var(--muted);padding:12px 0;font-style:italic}
 footer{color:rgba(255,255,255,.85);font-size:12px;text-align:center;margin-top:32px;text-shadow:0 1px 2px rgba(0,0,0,.4)}
 footer code{background:rgba(0,0,0,.25);color:#fff}
@@ -310,14 +318,19 @@ code{font-size:7.6pt;padding:0 3px}
 
 const JS = `
 const q=document.getElementById('q');
-const apply=()=>{const t=q?q.value.trim().toLowerCase():'',v6on=document.body.classList.contains('show-v6'),live=r=>v6on||!r.closest('.legacy');
-document.querySelectorAll('.row').forEach(r=>r.classList.toggle('hide',!!t&&!r.textContent.toLowerCase().includes(t)));
-document.querySelectorAll('.cat').forEach(c=>c.classList.toggle('hide',!c.querySelector('.row:not(.hide)')));
-document.querySelectorAll('section.tool').forEach(s=>s.classList.toggle('hide',![...s.querySelectorAll('.row:not(.hide)')].some(live)));};
+const sel=document.getElementById('ver');
+const apply=()=>{const t=q?q.value.trim().toLowerCase():'',v=sel?sel.value:'';
+document.querySelectorAll('.row').forEach(r=>{const rv=r.dataset.v;r.classList.toggle('vhide',!!v&&!!rv&&!rv.split(' ').includes(v));r.classList.toggle('hide',!!t&&!r.textContent.toLowerCase().includes(t))});
+document.querySelectorAll('.cat').forEach(c=>c.classList.toggle('hide',!c.querySelector('.row:not(.hide):not(.vhide)')));
+document.querySelectorAll('section.tool').forEach(s=>{const n=(COUNTS[s.id]||{})[v];s.classList.toggle('hide',!s.querySelector('.row:not(.hide):not(.vhide)'));const c=s.querySelector('.count');if(c&&n!==undefined)c.textContent=n+' entries'});
+document.querySelectorAll('nav.tabs a[data-id]').forEach(a=>{const n=(COUNTS[a.dataset.id]||{})[v];a.classList.toggle('vhide',!n);const e=a.querySelector('.n');if(e&&n!==undefined)e.textContent=n});};
 q&&q.addEventListener('input',apply);
-const v6=document.getElementById('v6');if(v6){let s6;try{s6=localStorage.getItem('tt-v6')}catch(e){}
-v6.checked=s6==='1';document.body.classList.toggle('show-v6',v6.checked);apply();
-v6.addEventListener('change',()=>{document.body.classList.toggle('show-v6',v6.checked);try{localStorage.setItem('tt-v6',v6.checked?'1':'0')}catch(e){}apply()})}
+if(sel){let sv;try{sv=localStorage.getItem('tt-ver')}catch(e){}
+const own=document.body.dataset.ver,ok=x=>x&&[...sel.options].some(o=>o.value===x);
+sel.value=ok(own)?own:ok(sv)?sv:LATEST;if(ok(own)){try{localStorage.setItem('tt-ver',own)}catch(e){}}apply();
+sel.addEventListener('change',()=>{try{localStorage.setItem('tt-ver',sel.value)}catch(e){}
+const tool=document.body.dataset.tool;if(tool){const a=document.querySelector('nav.tabs a[data-tool="'+tool+'"][data-ver="'+sel.value+'"]');if(a){location.href=a.getAttribute('href');return}}
+apply()})}
 const b=document.querySelector('button.theme');let th;try{th=localStorage.getItem('tt-theme')}catch(e){}
 if(th)document.documentElement.dataset.theme=th;
 b&&b.addEventListener('click',()=>{const dark=document.documentElement.dataset.theme?document.documentElement.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
@@ -344,37 +357,39 @@ const Q=${JSON.stringify(QUOTES)},qe=document.querySelector('.quote');qe&&(qe.te
 
 function renderTool(t) {
   const cats = t.doc.sections.map((s) => {
+    const vattr = s.vers.length ? ` data-v="${s.vers.join(' ')}"` : '';
     const rows = s.rows.map(([a = '', b = '', c = '']) => {
       const left = t.kind === 'shortcut' ? keys(a) : inline(a);
       const right = inline(b).replace(/^\[([A-Z]{1,6})\]\s*/, '<span class="tag">$1</span>');
       // Third column "Important" (★) = default state; the checkbox overrides it per browser.
       const imp = /★|^(x|yes|oui|true)$/i.test(c.trim());
       const key = esc(`${t.id}|${slug(s.name)}|${a}`);
-      return `<div class="row${imp ? ' imp' : ''}" data-key="${key}"${imp ? ' data-md="1"' : ''}><div class="k"><input class="star" type="checkbox"${imp ? ' checked' : ''} aria-label="Important" title="Important — tick to highlight"><span class="kv">${left}</span></div><div class="d">${right}</div></div>`;
+      return `<div class="row${imp ? ' imp' : ''}" data-key="${key}"${vattr}${imp ? ' data-md="1"' : ''}><div class="k"><input class="star" type="checkbox"${imp ? ' checked' : ''} aria-label="Important" title="Important — tick to highlight"><span class="kv">${left}</span></div><div class="d">${right}</div></div>`;
     }).join('');
-    const badges = s.tags.map((x) => `<span class="ver${x === 'v6' ? ' old' : ''}">${tagLabel(x)}</span>`).join('');
-    return `<div class="cat${s.legacy ? ' legacy' : ''}">${s.name ? `<h3>${inline(s.name)}${badges}<span class="n">${s.rows.length}</span></h3>` : ''}<div class="grid">${rows || '<div class="empty">No entries yet.</div>'}</div></div>`;
+    const badges = s.tags.map((x) => `<span class="ver">${tagLabel(x)}</span>`).join('');
+    return `<div class="cat">${s.name ? `<h3>${inline(s.name)}${badges}<span class="n">${s.rows.length}</span></h3>` : ''}<div class="grid">${rows || '<div class="empty">No entries yet.</div>'}</div></div>`;
   }).join('');
   const intro = t.doc.intro.length ? `<p class="intro">${inline(t.doc.intro.join(' '))}</p>` : '';
   return `<section class="tool glass" id="${t.id}" style="--accent:${t.accent}">
-<header>${HAT}<div><div class="kind">${t.label}</div><h2>${inline(t.doc.title || t.tool)}${t.doc.tags.map((x) => `<span class="ver">${tagLabel(x)}</span>`).join('')}</h2></div><div class="meta"><span class="count">${t.count} entries${t.legacyCount ? `<span class="legacy-n"> + ${t.legacyCount} v6</span>` : ''}</span><span class="src">${esc(t.src)}</span></div></header>
+<header>${HAT}<div><div class="kind">${t.label}</div><h2>${inline(t.doc.title || t.tool)}${t.doc.tags.map((x) => `<span class="ver">${tagLabel(x)}</span>`).join('')}</h2></div><div class="meta"><span class="count">${countFor(t, t.ver || LATEST)} entries</span><span class="src">${esc(t.src)}</span></div></header>
 ${intro}<div class="cats">${cats || '<div class="empty">No entries yet.</div>'}</div></section>`;
 }
 
 function page(title, subtitle, tools, navTools, current) {
-  const v6box = tools.some((t) => t.legacyCount) ? `<label class="hl" title="Show the previous BMad v6 commands and tips (hidden by default)"><input id="v6" type="checkbox">Show v6 (legacy) tips</label>` : '';
+  const verSel = VERSIONS.length ? `<select id="ver" class="ver-sel" title="BMad version shown (latest by default)" aria-label="BMad version">${VERSIONS.map((v) => `<option value="${v}"${v === LATEST ? ' selected' : ''}>BMad ${verLabel(v)}${v === LATEST ? ' (latest)' : ''}</option>`).join('')}</select>` : '';
+  const cur = current && tools.length === 1 ? tools[0] : null;
   const nav = KINDS.map((k) => {
-    const links = navTools.filter((t) => t.kind === k.kind).map((t) => `<a href="${t.href}" style="--accent:${t.accent}"${t.id === current ? ' aria-current="page"' : ''}><span class="dot"></span>${esc(t.tool)}<span class="n">${t.count}</span></a>`).join('');
+    const links = navTools.filter((t) => t.kind === k.kind).map((t) => `<a href="${t.href}" data-id="${t.id}" data-tool="${esc(t.tool)}" data-ver="${t.ver}" style="--accent:${t.accent}"${t.id === current ? ' aria-current="page"' : ''}><span class="dot"></span>${esc(t.tool)}<span class="n">${countFor(t, t.ver || LATEST)}</span></a>`).join('');
     return links ? `<div class="grp"><span class="glabel">${k.label}</span>${links}</div>` : '';
   }).join('');
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${esc(title)}</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet"><style>${CSS}</style></head><body${current ? ' class="single"' : ''}>${SCENE}<div class="wrap">
+<title>${esc(title)}</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet"><style>${CSS}</style></head><body${current ? ' class="single"' : ''}${cur && cur.ver ? ` data-ver="${cur.ver}" data-tool="${esc(cur.tool)}"` : ''}>${SCENE}<div class="wrap">
 <header class="top glass"><div class="brand">${HAT}<div><h1>${esc(title)}</h1><p class="sub">${subtitle}</p><p class="quote">“${esc(QUOTES[0]).replace(' — ', '” — ')}</p></div></div>
-<div class="tools"><input id="q" type="search" placeholder="Log Pose… filter  ( / )" aria-label="Filter"><label class="hl" title="Highlight the rows ticked as important"><input id="hl" type="checkbox" checked>★ Highlight</label><span class="neons" role="group" aria-label="Highlight color"><button type="button" data-n="green" style="background:#39ff14;color:#39ff14" title="Neon green" aria-label="Neon green"></button><button type="button" data-n="violet" style="background:#c04bff;color:#c04bff" title="Neon violet" aria-label="Neon violet"></button><button type="button" data-n="orange" style="background:#ff8a00;color:#ff8a00" title="Neon orange" aria-label="Neon orange"></button></span><button class="reset" type="button" title="Reset the ticks to the ★ of the Markdown files" aria-label="Reset important ticks">↺</button>${v6box}<label class="hl" title="Show and print only the rows ticked as important"><input id="only" type="checkbox">★ Only</label><span class="spacer"></span><button class="print" type="button" aria-label="Print (A4)" title="Print / Save as PDF (A4)">🖨 Print</button><button class="theme" type="button" aria-label="Toggle theme" title="Toggle light / dark">◐</button></div></header>
+<div class="tools"><input id="q" type="search" placeholder="Log Pose… filter  ( / )" aria-label="Filter"><label class="hl" title="Highlight the rows ticked as important"><input id="hl" type="checkbox" checked>★ Highlight</label><span class="neons" role="group" aria-label="Highlight color"><button type="button" data-n="green" style="background:#39ff14;color:#39ff14" title="Neon green" aria-label="Neon green"></button><button type="button" data-n="violet" style="background:#c04bff;color:#c04bff" title="Neon violet" aria-label="Neon violet"></button><button type="button" data-n="orange" style="background:#ff8a00;color:#ff8a00" title="Neon orange" aria-label="Neon orange"></button></span><button class="reset" type="button" title="Reset the ticks to the ★ of the Markdown files" aria-label="Reset important ticks">↺</button>${verSel}<label class="hl" title="Show and print only the rows ticked as important"><input id="only" type="checkbox">★ Only</label><span class="spacer"></span><button class="print" type="button" aria-label="Print (A4)" title="Print / Save as PDF (A4)">🖨 Print</button><button class="theme" type="button" aria-label="Toggle theme" title="Toggle light / dark">◐</button></div></header>
 <nav class="tabs glass">${nav}</nav>
 ${tools.map(renderTool).join('\n')}
 <footer>☠ Set sail on the Grand Line · Generated from the Markdown tables by <code>.claude/skills/tips-visuals/build.mjs</code> — edit the .md files, not this page.</footer>
-</div><script>${JS}</script></body></html>`;
+</div><script>const LATEST=${JSON.stringify(LATEST)},COUNTS=${JSON.stringify(COUNTS)};${JS}</script></body></html>`;
 }
 
 // --hook: called from a PostToolUse hook; only rebuild when the edited file is a Command/ or Shortcut/ table.
@@ -386,12 +401,17 @@ if (process.argv.includes('--hook')) {
 }
 
 const tools = collect();
+// Every version found in file names or section tags, newest first; the pages open on the latest.
+const VERSIONS = [...new Set(tools.flatMap((t) => [t.ver, ...t.doc.sections.flatMap((s) => s.vers)]).filter(Boolean))].sort(verCmp);
+const LATEST = VERSIONS[0] || '';
+// Entry counts per sheet and version, read by the page script for nav chips and sheet headers.
+const COUNTS = Object.fromEntries(tools.map((t) => [t.id, Object.fromEntries(['', ...VERSIONS].map((v) => [v, countFor(t, v)]))]));
 fs.mkdirSync(OUT, { recursive: true });
 for (const f of fs.readdirSync(OUT)) if (f.endsWith('.html')) fs.unlinkSync(path.join(OUT, f));
 
-const total = tools.reduce((n, t) => n + t.count, 0);
+const total = tools.reduce((n, t) => n + countFor(t, LATEST), 0);
 fs.writeFileSync(path.join(OUT, 'index.html'),
-  page('Tips & Tricks', `${total} current commands, shortcuts and tips across ${tools.length} cheat sheets`, tools,
+  page('Tips & Tricks', `${total} entries${LATEST ? ` for BMad ${verLabel(LATEST)}` : ''} across ${tools.length} cheat sheets · pick another BMad version in the dropdown`, tools,
     tools.map((t) => ({ ...t, href: `#${t.id}` }))));
 for (const t of tools) {
   fs.writeFileSync(path.join(OUT, `${t.id}.html`),

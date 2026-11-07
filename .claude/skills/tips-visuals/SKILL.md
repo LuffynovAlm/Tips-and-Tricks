@@ -21,7 +21,10 @@ Output (all files are wiped and rebuilt on each run, so removed tables disappear
 ## Rendering rules (what the script expects from the Markdown)
 
 - `# Title` → sheet title; text before the first `##` → intro line
-- `# Title {v6.12.4}` / `## Category {v6.12.4}` → version tags (comma-separated allowed). A section tagged only `{v6}` is **legacy**: it is rendered but hidden until the page checkbox **Show v6 (legacy) tips** (unchecked by default, kept in `localStorage` as `tt-v6`) is ticked; counts show `N entries + M v6`; tagged sections get a version pill. Untagged sections are always visible. The checkbox only appears on pages that contain legacy content
+- **BMad versions** → a **version dropdown** in the toolbar (`#ver`), listing every version found, newest first, and opening on the **latest** (V7 today). The choice is kept in `localStorage` (`tt-ver`). Two ways to declare a version:
+  - **File suffix**: `Command/Bmad/Bmad-commands-V7.md`, `…-V6.12.4.md`, `…-V6.md` (`-V<digits and dots>.md`). Every row of the file has that version; each file is its own page and id (`command-bmad-v7`). On such a page the dropdown switches to the sibling page of the chosen version.
+  - **Heading tags**: `# Title {v7}` (pill only) / `## Category {v6.12.4, v7}` (comma-separated allowed; `v7-alpha` normalises to `v7`). Rows of the section carry `data-v`.
+  Rows, categories, sheets and nav chips of other versions get `.vhide`; counts (header, nav) come from the `COUNTS` table embedded per page. Untagged sections of a non-versioned file show for every version
 - `## Category` → a group; each table row → one entry (first column = key, second = description)
 - Shortcut files: the key column is turned into `<kbd>` chips. `+` joins keys in a chord, `, ` means "then" (sequence), ` / ` means "or" (alternatives)
 - Command files: inline `` `code` `` is rendered as code chips; a description starting with `[CODE]` (BMad menu code) becomes a colored tag

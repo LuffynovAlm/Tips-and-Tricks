@@ -1,6 +1,28 @@
-# Workflow Tips {v6.12.4}
+# Workflow Tips
 
-The commands that give the most for the least: BMad build cycle (**6.12.4**; the previous v6 story cycle is kept under {v6}, hidden by default), the BMad loop for unattended runs, HVE `rpi-review`, and how to pick up an existing session in Claude Code or GitHub Copilot. Full syntax is in the Bmad, Hve, Claude and GithubCopilot command sheets.
+The commands that give the most for the least: BMad build cycle (**v7**, **6.12.4** and the first v6 story cycle, each tagged — pick the BMad version in the page dropdown, latest by default), the BMad loop for unattended runs, HVE `rpi-review`, and how to pick up an existing session in Claude Code or GitHub Copilot. Full syntax is in the Bmad, Hve, Claude and GithubCopilot command sheets.
+
+## BMad ticket cycle — bmad → Sofia → build → review {v7}
+
+| Tip | Why / How | Important |
+|---|---|---|
+| **Ask `bmad` where you are** | `bmad` replaces `bmad-help`: it answers from the installed modules' own help and recommends the next skill. `bmad status` changes nothing and prints the one command to run next | ★ |
+| Run `bmad setup` after every install or update | It creates/repairs `_bmad/`, asks the modules' new config questions and keeps the scripts other skills call in place. Needs `uv`. Updating: `npx skills update`, then `bmad setup` |  |
+| **The ticket is the spec** | The initiative, epic or story file is read first and in full by every skill. Its Requirements are settled; sources are re-read only when Sofia updates it. Keep the chat out of the hand-off | ★ |
+| **Talk to Sofia (`bmad-agent-po`) to plan** | No menu, just phrases: `create a spec` / `write the initiative from <PRD>`, `slice this`, `refine this ticket`, `what's ready`, `this changed, what now`. She replaces sprint-planning, create-epics-and-stories and correct-course | ★ |
+| Feed Sofia from the right upstream | Unsure it is worth building → `bmad-forge-idea` / `bmad-prfaq`; real detail needed → John (`bmad-agent-pm`) for the PRD; screens and flows → `bmad-ux`. They feed the ticket, they are not mandatory steps |  |
+| Shrink big inputs before planning | Transcripts, threads and voice memos through `bmad-ingest`; long documents through `bmad-shard-pro`. The planning skill then reads short notes. Hand a sharded doc over as its main file (named after the folder) |  |
+| Architecture only when parts must agree | If separately built epics share decisions (stack, contracts, formats, hosting) run `bmad-architecture` after the initiative exists, then ask Sofia to adopt it as a companion the epics cite |  |
+| **`bmad-build` in a fresh context** | `/clear`, then `/bmad-build` with a ticket id, a link, a file or free text; with nothing it takes the next ready ticket. Clarify → plan → implement → review → commit. The plan sits beside `tickets.toml` | ★ |
+| Smallest path that fits | One session can understand, build, review and finish it → `bmad-build` directly, no planning skill. An obvious low-risk edit needs no skill at all |  |
+| Review: pick the right reviewer | Build already reviews. `bmad-code-review` is redundant right after a thorough build review; use it on a PR/branch or in a new session, ideally another model. `bmad-walkthrough` is *you* reviewing, guided. `bmad-review` runs lenses when you say "review" | ★ |
+| A change surfaces mid-build | Tell Sofia `this changed, what now`: she updates, re-slices or drops and records the Decision. Work resumes at the earliest affected step, nothing is replayed |  |
+| Close an epic properly | `bmad-retrospective` on the finished epic folder (findings, action items, ADRs), then ask Sofia to close the epic. Plans stay as evidence |  |
+| After a build | Open the PR, or `bmad-qa-generate-e2e-tests` when you want end-to-end coverage. Done = intent satisfied, chosen checks pass, no chosen review leaves material findings open |  |
+| Agents keep making the same mistake | `bmad-project-context` (`record`) turns it into a pitfall in the small verified `AGENTS.md` block |  |
+| No one at the keyboard | `bmad-build-auto` builds one ticket unattended; `bmad-loop` drives it (see the loop section). Keep the tickets small and the criteria clear |  |
+| Coming from v6? Migrate first | `bmad migrate method` turns epics, sprint-status and stories into the ticket tree, with a backup and a plan you approve. Full steps in the UpgradeBmad tips | ★ |
+| Log the AI cost in the deliverable | `/cost` before closing, then the `AI usage:` line in the build plan (and the review block), one line per session, a total at the end |  |
 
 ## BMad build cycle — help → sprint plan → build → review {v6.12.4}
 
@@ -19,7 +41,7 @@ The commands that give the most for the least: BMad build cycle (**6.12.4**; the
 | Old skill names still work | `bmad-quick-dev`, `bmad-create-prd`, `bmad-sprint-status`, `bmad-checkpoint-preview`, `bmad-market-research`… forward to the new skills (shims, removed with v7 only). Prefer the new names |  |
 | Log the AI cost in the deliverable | `/cost` before closing, then the `AI usage:` line in the spec's *Implementation Notes* (bmad-build) or the story's *Dev Agent Record* (v6), one line per session, a total at the end |  |
 
-## BMad loop — unattended build with `bmad-loop` {v6.12.4}
+## BMad loop — unattended build with `bmad-loop` {v6.12.4, v7}
 
 `bmad-loop` is an orchestrator, not a skill. It spawns a fresh coding CLI session per step (dev with `bmad-build-auto`, then a review pass), watches their hook signals and checks their artifacts. Use it for a queue of well-specified stories; keep `/bmad-build` for work that needs your judgment.
 
