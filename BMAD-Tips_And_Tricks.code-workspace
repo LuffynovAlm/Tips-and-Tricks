@@ -1,9 +1,15 @@
 {
 	"folders": [
 		{
+			"name": "BMAD-SETUP-V7",
+			"path": "../BMAD-SETUP-V7"
+		},
+		{
+			"name": "BMAD-SETUP",
 			"path": "../BMAD-SETUP"
 		},
 		{
+			"name": "Tips and Tricks",
 			"path": "."
 		}
 	],

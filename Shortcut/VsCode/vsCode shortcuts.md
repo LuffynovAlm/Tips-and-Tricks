@@ -39,6 +39,7 @@ Windows default keybindings. `Ctrl+K Ctrl+S` opens the full list.
 | Shift+Alt+A | Toggle block comment |  |
 | Alt+Up / Alt+Down | Move line up / down | ★ |
 | Shift+Alt+Up / Shift+Alt+Down | Copy line up / down |  |
+| Shift+Alt+C / Shift+Alt+Down | Copy file path | ★ |
 | Ctrl+Shift+K | Delete line |  |
 | Ctrl+Enter | Insert line below |  |
 | Ctrl+D | Add next occurrence to selection | ★ |
